@@ -1,3 +1,5 @@
+import createSpacing from "@material-ui/core/styles/createSpacing";
+
 const styles = theme => ({
 	sendBtn: {
 		color: "blue",
@@ -6,7 +8,13 @@ const styles = theme => ({
 			color: "gray"
 		}
 	},
-
+	attachBtn: {
+		color: "black",
+		cursor: "pointer",
+		"&:hover": {
+			color: "gray"
+		}
+	},
 	chatTextBoxContainer: {
 		position: "absolute",
 		bottom: "15px",
@@ -17,7 +25,7 @@ const styles = theme => ({
 	},
 
 	chatTextBox: {
-		width: "calc(100% - 25px)"
+		width: "calc(100% - 50px)"
 	}
 });
 

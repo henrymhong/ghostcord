@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
 
 class ChatViewComponent extends React.Component {
 	componentDidMount = () => {

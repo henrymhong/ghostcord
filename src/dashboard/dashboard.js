@@ -6,6 +6,7 @@ import ChatTextBoxComponent from "../chatTextBox/chatTextBox";
 import styles from "./styles";
 import { Button, withStyles } from "@material-ui/core";
 import fire from "../config/fire";
+import firebase from "firebase/app";
 
 class DashboardComponent extends React.Component {
 	constructor() {
@@ -89,7 +90,7 @@ class DashboardComponent extends React.Component {
 			.collection("chats")
 			.doc(docKey)
 			.update({
-				messages: fire.firestore.FieldValue.arrayUnion({
+				messages: firebase.firestore.FieldValue.arrayUnion({
 					sender: this.state.email,
 					message: msg,
 					timestamp: Date.now()

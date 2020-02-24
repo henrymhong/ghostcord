@@ -29,7 +29,7 @@ class NewChatComponent extends React.Component {
 				<CssBaseline />
 				<Paper className={classes.paper}>
 					<Typography component="h1" variant="h5">
-						Send A Message!
+						Start a new chat
 					</Typography>
 					<form
 						className={classes.form}
@@ -37,7 +37,7 @@ class NewChatComponent extends React.Component {
 					>
 						<FormControl fullWidth>
 							<InputLabel htmlFor="new-chat-username">
-								Enter Your Friend's Email
+								Enter your friend's email
 							</InputLabel>
 							<Input
 								required
@@ -49,7 +49,7 @@ class NewChatComponent extends React.Component {
 						</FormControl>
 						<FormControl fullWidth>
 							<InputLabel htmlFor="new-chat-message">
-								Enter Your Message
+								Enter your message
 							</InputLabel>
 							<Input
 								required

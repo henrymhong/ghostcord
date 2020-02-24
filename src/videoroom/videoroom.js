@@ -86,14 +86,14 @@ class VideoRoomComponent extends Component {
                     className={classes.video} 
                     ref={this.remoteVideoref} 
                     autoPlay></video>
-
+                <br />
                 <button onClick={this.createOffer}>Offer</button>
-                <button onClick={this.createAnswer}>Offer</button>
+                <button onClick={this.createAnswer}>Answer</button>
                 <br/>
                 <textarea ref={ref => {this.textref = ref}}/>
                 <br />
-                <button onClick={this.setRemoteDescription}>Offer</button>
-                <button onClick={this.addCandidate}>Offer</button>
+                <button onClick={this.setRemoteDescription}>Set Remote Desc</button>
+                <button onClick={this.addCandidate}>Add Candidate</button>
             </div>
         );
     }

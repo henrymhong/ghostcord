@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
 
 class ChatViewComponent extends React.Component {
 	componentDidMount = () => {
 		const container = document.getElementById("chatview-container");
-		if (container) container.scrollTo(0, container.scrollHeight);
+		if (container) container.scrollTo(0, container.scrollHeight); // scroll to to the bottom
 	};
 	componentDidUpdate = () => {
 		const container = document.getElementById("chatview-container");
@@ -21,25 +22,36 @@ class ChatViewComponent extends React.Component {
 			return (
 				<div>
 					<div className={classes.chatHeader}>
-						Your conversation with{" "}
+						{/* <Avatar alt="Remy Sharp">
+							{
+								// find first letter of name
+								this.props.chat.users
+									.filter(
+										_usr => _usr !== this.props.email
+									)[0]
+									.split("")[0]
+							}
+						</Avatar> */}
 						{
 							this.props.chat.users.filter(
-								_usr => _usr !== this.props.user
+								_usr => _usr !== this.props.email
 							)[0]
 						}
 					</div>
 					<main id="chatview-container" className={classes.content}>
-						{this.props.chat.messages.map((_msg, _index) => {
+						{this.props.chat.messages.map((msg, index) => {
+							// map all messages
 							return (
 								<div
-									key={_index}
+									key={index}
 									className={
-										_msg.sender === this.props.user
+										// if user sent it give it user sent class, and otherwise for friend
+										msg.sender === this.props.user
 											? classes.userSent
 											: classes.friendSent
 									}
 								>
-									{_msg.message}
+									{msg.message}
 								</div>
 							);
 						})}

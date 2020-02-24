@@ -11,7 +11,7 @@ class DashboardComponent extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			selectedChat: null,
+			selectedChat: null, // index of which chat is currently selected in dashboard
 			newChatFormVisible: false, // show or hide the create a chat function
 			email: null,
 			friends: [],
@@ -168,18 +168,22 @@ class DashboardComponent extends React.Component {
 		].sender !== this.state.email;
 
 	componentWillMount = () => {
-		fire.auth().onAuthStateChanged(async _usr => {
-			if (!_usr) this.props.history.push("/login");
+		fire.auth().onAuthStateChanged(async usr => {
+			// check current user auth state
+			if (!usr) this.props.history.push("/login");
+			// move to login if no user
 			else {
+				// otherwise check user arrays of chats with current user email
 				await fire
 					.firestore()
 					.collection("chats")
-					.where("users", "array-contains", _usr.email)
-					.onSnapshot(async res => {
-						const chats = res.docs.map(_doc => _doc.data());
+					.where("users", "array-contains", usr.email)
+					.onSnapshot(async result => {
+						// anytime there is an update in database, call this to update chat list
+						const chats = result.docs.map(doc => doc.data());
 						await this.setState({
-							email: _usr.email,
-							chats: chats,
+							email: usr.email, // set the current user email
+							chats: chats, // set chats in state
 							friends: []
 						});
 					});

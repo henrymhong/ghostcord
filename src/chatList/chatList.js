@@ -26,29 +26,31 @@ class ChatListComponent extends React.Component {
 						onClick={this.newChat}
 						className={classes.newChatBtn}
 					>
-						New Message
+						Start chat
 					</Button>
 					<List>
-						{this.props.chats.map((_chat, _index) => {
+						{this.props.chats.map((chat, index) => {
+							// for each chat in chats
 							return (
-								<div key={_index}>
-									<ListItem
-										onClick={() => this.selectChat(_index)}
+								<div key={index}>
+									<ListItem // create a list item
+										onClick={() => this.selectChat(index)}
 										className={classes.listItem}
 										selected={
 											this.props.selectedChatIndex ===
-											_index
+											index
 										}
 										alignItems="flex-start"
 									>
 										<ListItemAvatar>
 											<Avatar alt="Remy Sharp">
 												{
-													_chat.users
+													// find first letter of name
+													chat.users
 														.filter(
-															_user =>
-																_user !==
-																this.props.email
+															user =>
+																user !==
+																this.props.email // ignore own email
 														)[0]
 														.split("")[0]
 												}
@@ -56,9 +58,9 @@ class ChatListComponent extends React.Component {
 										</ListItemAvatar>
 										<ListItemText
 											primary={
-												_chat.users.filter(
-													_user =>
-														_user !==
+												chat.users.filter(
+													user =>
+														user !==
 														this.props.email
 												)[0]
 											}
@@ -68,8 +70,9 @@ class ChatListComponent extends React.Component {
 														component="span"
 														color="textPrimary"
 													>
-														{_chat.messages[
-															_chat.messages
+														{// display the last 30 characters of the last message
+														chat.messages[
+															chat.messages
 																.length - 1
 														].message.substring(
 															0,
@@ -79,8 +82,8 @@ class ChatListComponent extends React.Component {
 												</React.Fragment>
 											}
 										/>
-										{_chat.receiverHasRead === false &&
-										!this.userIsSender(_chat) ? (
+										{chat.receiverHasRead === false &&
+										!this.userIsSender(chat) ? (
 											<ListItemIcon>
 												<NotificationImportant
 													className={
@@ -98,6 +101,7 @@ class ChatListComponent extends React.Component {
 				</div>
 			);
 		} else {
+			// if theres no chats, just display the new chat button
 			return (
 				<div className={classes.root}>
 					<Button
@@ -107,16 +111,19 @@ class ChatListComponent extends React.Component {
 						onClick={this.newChat}
 						className={classes.newChatBtn}
 					>
-						New Message
+						Create first chat
 					</Button>
 					<List></List>
 				</div>
 			);
 		}
 	}
+
 	userIsSender = chat =>
 		chat.messages[chat.messages.length - 1].sender === this.props.email;
+
 	newChat = () => this.props.newChatBtnFn();
+
 	selectChat = index => this.props.selectChatFn(index);
 }
 

@@ -156,7 +156,8 @@ class DashboardComponent extends React.Component {
 				messages: [
 					{
 						message: chatObj.message,
-						sender: this.state.email
+						sender: this.state.email,
+						timestamp: Date.now()
 					}
 				],
 				users: [this.state.email, chatObj.sendTo],

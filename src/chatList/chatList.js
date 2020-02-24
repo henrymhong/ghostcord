@@ -60,7 +60,7 @@ class ChatListComponent extends React.Component {
 								)[0]
 								.split("")[0];
 							var avatar = null;
-							console.log(objEmail > fire.auth().currentUser.email);
+							//console.log(objEmail > fire.auth().currentUser.email);
 							if (objEmail > fire.auth().currentUser.email) {
 								avatar = chat.avatars[0].avatar2;
 								//console.log(avatar);

@@ -51,6 +51,9 @@ class ChatViewComponent extends React.Component {
 									}
 								>
 									{msg.message}
+									<div style={{ fontSize: "10px", paddingTop: 5 }}>
+										{new Date(msg.timestamp).toLocaleString()}
+									</div>
 								</div>
 							);
 						})}

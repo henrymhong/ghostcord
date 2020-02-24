@@ -12,7 +12,7 @@ import Button from "@material-ui/core/Button";
 import fire from "../config/fire";
 import GoogleButton from "react-google-button";
 import "./login.css";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 class LoginComponent extends Component {
 	constructor() {
@@ -35,10 +35,7 @@ class LoginComponent extends Component {
 					<Typography component="h1" variant="h5">
 						Welcome
 					</Typography>
-					<form
-						className={classes.form}
-						onSubmit={e => this.submitLogin(e)}
-					>
+					<form className={classes.form} onSubmit={e => this.submitLogin(e)}>
 						<FormControl required fullWidth margin="normal">
 							<InputLabel htmlFor="login-email-input">
 								Enter Your Email
@@ -80,9 +77,7 @@ class LoginComponent extends Component {
 							Incorrect Login Information
 						</Typography>
 					) : null}
-					<h5 className={classes.noAccountHeader}>
-						Don't Have An Account?
-					</h5>
+					<h5 className={classes.noAccountHeader}>Don't Have An Account?</h5>
 					<Link className={classes.signUpLink} to="/signup">
 						Sign Up!
 					</Link>
@@ -113,14 +108,16 @@ class LoginComponent extends Component {
 	};
 
 	googleLogin = () => {
-		fire.auth()
+		fire
+			.auth()
 			.signInWithPopup(this.provider)
 			.then(res => {
 				const userObj = {
 					email: res.user.email,
 					name: res.user.displayName
 				};
-				fire.firestore()
+				fire
+					.firestore()
 					.collection("users")
 					.doc(res.user.email)
 					.set(userObj)

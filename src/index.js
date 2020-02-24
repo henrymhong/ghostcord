@@ -14,7 +14,7 @@ import VideoRoomComponent from "./videoroom/videoroom";
 const routing = (
 	<Router>
 		<div id="routing-container">
-			<Redirect exact from="/" to="/login" />
+			<Redirect exact from="/" to="/dashboard" />
 			<Route path="/login" component={LoginComponent}></Route>
 			<Route path="/signup" component={SignupComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>

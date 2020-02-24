@@ -10,14 +10,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import fire from "../config/fire";
-import GoogleButton from 'react-google-button'
-import './login.css'
-import firebase from 'firebase'
+import GoogleButton from "react-google-button";
+import "./login.css";
+import firebase from "firebase";
 
 class LoginComponent extends Component {
 	constructor() {
 		super();
-		this.provider = new firebase.auth.GoogleAuthProvider()
+		this.provider = new firebase.auth.GoogleAuthProvider();
 		this.state = {
 			email: null,
 			password: null,
@@ -87,11 +87,12 @@ class LoginComponent extends Component {
 						Sign Up!
 					</Link>
 				</Paper>
-				<GoogleButton className ="btnLogin" type="light"
-  					onClick={this.googleLogin}
+				<GoogleButton
+					className="btnLogin"
+					type="light"
+					onClick={this.googleLogin}
 				/>
 			</main>
-			
 		);
 	}
 
@@ -107,16 +108,31 @@ class LoginComponent extends Component {
 				break;
 		}
 	};
-	googleLogin = () =>{
-		fire
-			.auth()
+
+	googleLogin = () => {
+		fire.auth()
 			.signInWithPopup(this.provider)
-			.then(
-				() => {
-					this.props.history.push("/dashboard");
-				}
-			);
-	}
+			.then(res => {
+				const userObj = {
+					email: res.user.email,
+					name: res.user.displayName
+				};
+				fire.firestore()
+					.collection("users")
+					.doc(res.user.email)
+					.set(userObj)
+					.then(
+						() => {
+							this.props.history.push("/dashboard");
+						},
+						dbError => {
+							console.log(dbError);
+						}
+					);
+				this.props.history.push("/dashboard");
+			});
+	};
+
 	submitLogin = async e => {
 		e.preventDefault(); // This is to prevent the automatic refreshing of the page on submit.
 

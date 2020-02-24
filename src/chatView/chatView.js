@@ -33,7 +33,7 @@ class ChatViewComponent extends React.Component {
 						</Avatar> */}
 						{
 							this.props.chat.users.filter(
-								_usr => _usr !== this.props.userEmail
+								usr => usr !== this.props.userEmail
 							)[0]
 						}
 					</div>
@@ -45,7 +45,7 @@ class ChatViewComponent extends React.Component {
 									key={index}
 									className={
 										// if user sent it give it user sent class, and otherwise for friend
-										msg.sender === this.props.user
+										msg.sender === this.props.userEmail
 											? classes.userSent
 											: classes.friendSent
 									}

@@ -36,7 +36,7 @@ class DashboardComponent extends React.Component {
 					></ChatListComponent>
 					{this.state.newChatFormVisible ? null : (
 						<ChatViewComponent
-							user={this.state.email}
+							userEmail={this.state.email}
 							chat={this.state.chats[this.state.selectedChat]}
 						></ChatViewComponent>
 					)}
@@ -58,6 +58,12 @@ class DashboardComponent extends React.Component {
 						className={classes.aboutBtn}
 					>
 						About
+					</Button>
+					<Button
+						onClick={() => this.props.history.push("/friends")}
+						className={classes.friendsBtn}
+					>
+						Friends
 					</Button>
 					<Button
 						onClick={() => this.props.history.push("/profile")}

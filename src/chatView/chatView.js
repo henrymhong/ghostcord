@@ -33,7 +33,7 @@ class ChatViewComponent extends React.Component {
 						</Avatar> */}
 						{
 							this.props.chat.users.filter(
-								_usr => _usr !== this.props.email
+								_usr => _usr !== this.props.userEmail
 							)[0]
 						}
 					</div>

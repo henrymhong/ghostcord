@@ -7,6 +7,7 @@ import LoginComponent from "./login/login";
 import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
 import ProfileComponent from "./profile/profile";
+import FriendsComponent from "./friends/friends";
 import AboutComponent from "./about/about";
 
 const routing = (
@@ -16,6 +17,7 @@ const routing = (
 			<Route path="/login" component={LoginComponent}></Route>
 			<Route path="/signup" component={SignupComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>
+			<Route path="/friends" component={FriendsComponent}></Route>
 			<Route path="/profile" component={ProfileComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
 		</div>

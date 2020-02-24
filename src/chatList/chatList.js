@@ -50,7 +50,8 @@ class ChatListComponent extends React.Component {
 														.filter(
 															user =>
 																user !==
-																this.props.email // ignore own email
+																this.props
+																	.userEmail // ignore own email
 														)[0]
 														.split("")[0]
 												}
@@ -61,7 +62,7 @@ class ChatListComponent extends React.Component {
 												chat.users.filter(
 													user =>
 														user !==
-														this.props.email
+														this.props.userEmail
 												)[0]
 											}
 											secondary={

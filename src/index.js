@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import LoginComponent from "./login/login";
 import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
@@ -12,6 +12,7 @@ import AboutComponent from "./about/about";
 const routing = (
 	<Router>
 		<div id="routing-container">
+			<Redirect exact from="/" to="/login" />
 			<Route path="/login" component={LoginComponent}></Route>
 			<Route path="/signup" component={SignupComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>

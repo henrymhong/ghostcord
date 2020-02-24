@@ -86,6 +86,9 @@ class LoginComponent extends Component {
 					<Link className={classes.signUpLink} to="/signup">
 						Sign Up!
 					</Link>
+					<Link className={classes.signUpLink} to="/videoroom">
+						Video
+					</Link>
 				</Paper>
 				<GoogleButton
 					className="btnLogin"

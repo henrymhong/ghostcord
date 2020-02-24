@@ -9,6 +9,7 @@ import DashboardComponent from "./dashboard/dashboard";
 import ProfileComponent from "./profile/profile";
 import FriendsComponent from "./friends/friends";
 import AboutComponent from "./about/about";
+import VideoRoomComponent from "./videoroom/videoroom";
 
 const routing = (
 	<Router>
@@ -20,6 +21,7 @@ const routing = (
 			<Route path="/friends" component={FriendsComponent}></Route>
 			<Route path="/profile" component={ProfileComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
+			<Route path="/videoroom" component={VideoRoomComponent}></Route>
 		</div>
 	</Router>
 );

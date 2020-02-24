@@ -71,10 +71,7 @@ class DashboardComponent extends React.Component {
 					>
 						Profile
 					</Button>
-					<Button
-						onClick={this.signOut}
-						className={classes.signOutBtn}
-					>
+					<Button onClick={this.signOut} className={classes.signOutBtn}>
 						Sign Out
 					</Button>
 				</div>
@@ -92,7 +89,8 @@ class DashboardComponent extends React.Component {
 				_usr => _usr !== this.state.email
 			)[0]
 		);
-		fire.firestore()
+		fire
+			.firestore()
 			.collection("chats")
 			.doc(docKey)
 			.update({
@@ -113,6 +111,43 @@ class DashboardComponent extends React.Component {
 
 	newChatSubmit = async chatObj => {
 		const docKey = this.makeChatID(chatObj.sendTo);
+		let av1 = null;
+		let av2 = null;
+		if (docKey.split(":")[0] === this.state.email) {
+			av1 = await fire
+				.firestore()
+				.collection("users")
+				.doc(this.state.email)
+				.get()
+				.then(res => {
+					return res.data().avatar ? res.data().avatar : null;
+				});
+			av2 = await fire
+				.firestore()
+				.collection("users")
+				.doc(chatObj.sendTo)
+				.get()
+				.then(res => {
+					return res.data().avatar ? res.data().avatar : null;
+				});
+		} else {
+			av1 = await fire
+				.firestore()
+				.collection("users")
+				.doc(chatObj.sendTo)
+				.get()
+				.then(res => {
+					return res.data().avatar ? res.data().avatar : null;
+				});
+			av2 = await fire
+				.firestore()
+				.collection("users")
+				.doc(this.state.email)
+				.get()
+				.then(res => {
+					return res.data().avatar ? res.data().avatar : null;
+				});
+		}
 		await fire
 			.firestore()
 			.collection("chats")
@@ -125,7 +160,14 @@ class DashboardComponent extends React.Component {
 					}
 				],
 				users: [this.state.email, chatObj.sendTo],
-				receiverHasRead: false
+				//users: [this.state.email, chatObj.sendTo],
+				receiverHasRead: false,
+				avatars: [
+					{
+						avatar1: av1,
+						avatar2: av2
+					}
+				]
 			});
 		this.setState({ newChatFormVisible: false });
 		this.selectChat(this.state.chats.length - 1);
@@ -160,7 +202,8 @@ class DashboardComponent extends React.Component {
 			)[0]
 		);
 		if (this.clickedMessageWhereNotSender(chatIndex)) {
-			fire.firestore()
+			fire
+				.firestore()
 				.collection("chats")
 				.doc(docKey)
 				.update({ receiverHasRead: true });

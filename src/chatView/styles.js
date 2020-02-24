@@ -12,7 +12,7 @@ const styles = theme => ({
 	},
 
 	userSent: {
-		float: "left",
+		float: "right",
 		clear: "both",
 		padding: "20px",
 		boxSizing: "border-box",
@@ -25,7 +25,7 @@ const styles = theme => ({
 	},
 
 	friendSent: {
-		float: "right",
+		float: "left",
 		clear: "both",
 		padding: "20px",
 		boxSizing: "border-box",

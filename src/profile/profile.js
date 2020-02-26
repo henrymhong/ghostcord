@@ -35,19 +35,13 @@ import { Link } from "react-router-dom";
 
 export default class ProfileComponent extends Component {
 	
-	state = {
-		image: null,
-		url: "",
-		user: "",
-	}
-	
 	constructor(props) {
 		super(props);
-		// this.state = {
-		// 	image: null,
-		// 	url: "",
-		// 	user: ""
-		// };
+		this.state = {
+			image: null,
+			url: "",
+			user: ""
+		};
 	}
 
 	componentDidMount() {
@@ -85,12 +79,7 @@ export default class ProfileComponent extends Component {
 				/>
 				<h1>{this.state.user.name}</h1>
 				<h2>{ this.state.user.email }</h2>
-				<Link
-						onClick={() => this.props.history.push("/profile/edit")}
-						// className={classes.profileBtn}
-					>
-						Edit
-					</Link>
+				<Link onClick={() => this.props.history.push("/profile/edit")}>Edit</Link>
 			</div>
 		);
 	}

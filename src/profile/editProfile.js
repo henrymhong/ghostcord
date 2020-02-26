@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fire, { storage, db } from "../config/fire";
+import fire, { storage } from "../config/fire";
 import { Link } from "react-router-dom";
 
 export default class EditProfileComponent extends Component {

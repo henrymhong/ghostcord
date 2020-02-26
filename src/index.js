@@ -7,6 +7,7 @@ import LoginComponent from "./login/login";
 import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
 import ProfileComponent from "./profile/profile";
+import EditProfileComponent from "./profile/editProfile";
 import FriendsComponent from "./friends/friends";
 import AboutComponent from "./about/about";
 import VideoRoomComponent from "./videoroom/videoroom";
@@ -14,12 +15,13 @@ import VideoRoomComponent from "./videoroom/videoroom";
 const routing = (
 	<Router>
 		<div id="routing-container">
-			<Redirect exact from="/" to="/dashboard" />
+			<Redirect exact from="/" to="/login" />
 			<Route path="/login" component={LoginComponent}></Route>
 			<Route path="/signup" component={SignupComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>
 			<Route path="/friends" component={FriendsComponent}></Route>
 			<Route path="/profile" component={ProfileComponent}></Route>
+			<Route path ="/profile/edit" component={EditProfileComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
 			<Route path="/videoroom" component={VideoRoomComponent}></Route>
 		</div>

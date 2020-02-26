@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import fire, { storage } from "../config/fire";
+import fire, { storage, db } from "../config/fire";
+import { Link } from "react-router-dom";
 
 // import { makeStyles } from "@material-ui/core/styles";
 // import Paper from "@material-ui/core/Paper";
@@ -33,63 +34,63 @@ import fire, { storage } from "../config/fire";
 // }
 
 export default class ProfileComponent extends Component {
+	
+	state = {
+		image: null,
+		url: "",
+		user: "",
+	}
+	
 	constructor(props) {
 		super(props);
-		this.state = {
-			image: null,
-			url: ""
-		};
-		this.handleChange = this.handleChange.bind(this);
-		this.handleUpload = this.handleUpload.bind(this);
+		// this.state = {
+		// 	image: null,
+		// 	url: "",
+		// 	user: ""
+		// };
 	}
 
-	handleChange = e => {
-		if (e.target.files[0]) {
-			const image = e.target.files[0];
-			this.setState(() => ({ image }));
-		}
-	};
-
-	handleUpload = () => {
-		const { image } = this.state;
-		const uploadTask = storage.ref(`images/${image.name}`).put(image);
-		uploadTask.on(
-			"state_changed",
-			snapshot => {},
-			error => {
-				console.log(error);
-			},
-			() => {
-				storage
-					.ref("images")
-					.child(image.name)
-					.getDownloadURL()
-					.then(url => {
-						console.log(url);
-						this.setState({ url });
-						fire
-							.firestore()
-							.collection("users")
-							.doc(fire.auth().currentUser.email)
-							.update({ avatar: url });
+	componentDidMount() {
+		var user = fire.auth().currentUser;
+		if(user != null) {
+			console.log("user found");
+			fire.firestore()
+				.collection('users')
+				.where("email", "==", user.email)
+				.get()
+				.then(snapshot => {
+					var user = "";
+					snapshot.forEach(doc => {
+						console.log(doc.id, "=>", doc.data());
+						var data = doc.data();
+						user = data;
 					});
-			}
-		);
-	};
+					this.setState({ user: user });
+				})
+				.catch(error => console.log(error));
+		}
+		else {
+			console.log("user not found");
+		}
+	}
 
 	render() {
 		return (
 			<div>
-				<h1>Profile</h1>
-				<input type="file" onChange={this.handleChange} />
-				<button onClick={this.handleUpload}>Set Profile Picture</button>
-				<br />
-				<img
-					src={this.state.url || "http://via.placeholder.com/400x300"}
-					alt="Uploaded"
-					width="400"
-					height="300"
+				<img 
+					src={this.state.user.avatar} 
+					width="85"
+					height="85" 
+					alt="profile pic"
 				/>
+				<h1>{this.state.user.name}</h1>
+				<h2>{ this.state.user.email }</h2>
+				<Link
+						onClick={() => this.props.history.push("/profile/edit")}
+						// className={classes.profileBtn}
+					>
+						Edit
+					</Link>
 			</div>
 		);
 	}

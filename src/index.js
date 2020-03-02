@@ -20,7 +20,7 @@ const routing = (
 			<Route path="/signup" component={SignupComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>
 			<Route path="/friends" component={FriendsComponent}></Route>
-			<Route path="/profile" component={ProfileComponent}></Route>
+			<Route exact path="/profile" component={ProfileComponent}></Route>
 			<Route path ="/profile/edit" component={EditProfileComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
 			<Route path="/videoroom" component={VideoRoomComponent}></Route>

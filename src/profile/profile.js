@@ -104,7 +104,7 @@ export default class ProfileComponent extends Component {
 				/>
 				<h1>{this.state.user.name}</h1>
 				<h2>{ this.state.user.email }</h2>
-				<Link onClick={() => this.props.history.push("/profile/edit")}>Edit</Link>
+				<Link to="/profile/edit">Edit</Link>
 			</div>
 		);
 	}

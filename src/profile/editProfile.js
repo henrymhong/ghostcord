@@ -156,11 +156,11 @@ export default class EditProfileComponent extends Component {
 					
                     <div>
 						<label>Avatar:</label>
-                        <input type="file" onChange={ e => {this.userTyping("avatar", e)}}/>
+                        <Link type="file" onChange={ e => {this.userTyping("avatar", e)}}/>
                         {/* <button onClick={this.handleUpload}>Set Profile Picture</button> */}
                         <br />
                         <img
-                            src={this.state.url}
+                            src={this.state.url || this.state.avatar}
                             alt="Uploaded"
                             width="85"
                             height="85"
@@ -169,20 +169,10 @@ export default class EditProfileComponent extends Component {
                     </div>
 
                     <div>
-                        <input type="submit" value="Save" onClick={this.update}/>
+                        <input type="submit" value="Save" onClick={this.update}/>		
                     </div>
-                    {/* <div>
-                        <label>
-                            Email:
-                        </label>
-						<input 
-							placeholder={this.state.user.email}
-							onChange={e => {
-								this.userTyping("email", e)
-							}}
-						/>
-                    </div> */}
                 </form>
+						<Link onClick={() => this.props.history.push("/profile")}>Cancel</Link>
             </div>
         )
     }

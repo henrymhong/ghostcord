@@ -9,7 +9,7 @@ export default class EditProfileComponent extends Component {
 		super(props);
 
 		this.state = {
-			image: null,
+			image: "",
 			url: "",
 			user: "",
 			name: "",
@@ -80,23 +80,6 @@ export default class EditProfileComponent extends Component {
 				break;
 		}
 	};
-	
-	//	retrieves document id 
-	// getId(user) {
-	// 	console.log("in getId")
-	// 	fire.firestore()
-	// 		.collection('users')
-	// 		.get()
-	// 		.then(snapshot => {
-	// 		console.log("got snapshot: ", snapshot);
-	// 		console.log("user: ", user);
-	// 		snapshot.docs.forEach((doc) => {
-	// 			if(doc === user) {
-	// 				console.log("id found: ", doc.id);
-	// 			}
-	// 		})
-	// 	})
-	// }
 
 	update = (e) => {
 		e.preventDefault();
@@ -134,7 +117,6 @@ export default class EditProfileComponent extends Component {
 			}
 		);
 
-
 		alert("Profile saved successfully!");
 		this.props.history.push("/profile")
 	};
@@ -153,10 +135,10 @@ export default class EditProfileComponent extends Component {
 							}}
 						/>
 					</div>
-					
+					<br/>
                     <div>
 						<label>Avatar:</label>
-                        <Link type="file" onChange={ e => {this.userTyping("avatar", e)}}/>
+                        <input type="file" onChange={ e => {this.userTyping("avatar", e)}}/>
                         {/* <button onClick={this.handleUpload}>Set Profile Picture</button> */}
                         <br />
                         <img
@@ -165,12 +147,9 @@ export default class EditProfileComponent extends Component {
                             width="85"
                             height="85"
                         />
-                        <br/>
                     </div>
-
-                    <div>
-                        <input type="submit" value="Save" onClick={this.update}/>		
-                    </div>
+					<br/>
+					<input type="submit" value="Save" onClick={this.update}/>		
                 </form>
 						<Link onClick={() => this.props.history.push("/profile")}>Cancel</Link>
             </div>

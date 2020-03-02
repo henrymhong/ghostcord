@@ -13,18 +13,24 @@ import fire from "../config/fire";
 import GoogleButton from "react-google-button";
 import "./login.css";
 import firebase from "firebase/app";
+import { FacebookLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { InstagramLoginButton } from "react-social-login-buttons";
+
 
 class LoginComponent extends Component {
 	constructor() {
 		super();
 		this.provider = new firebase.auth.GoogleAuthProvider();
+		this.provider2 = new firebase.auth.FacebookAuthProvider();
 		this.state = {
 			email: null,
 			password: null,
 			serverError: false
 		};
 	}
-
+	
+	
 	render() {
 		const { classes } = this.props;
 
@@ -85,10 +91,17 @@ class LoginComponent extends Component {
 						Video
 					</Link>
 				</Paper>
-				<GoogleButton
-					className="btnLogin"
-					type="light"
-					onClick={this.googleLogin}
+				<GoogleLoginButton 
+					onClick={() => this.googleLogin()}
+					align
+				/>
+				<FacebookLoginButton 
+				onClick={() => this.fbLogin()}
+				align
+				/>
+				<InstagramLoginButton 
+					onClick={() => this.googleLogin()}
+					align
 				/>
 			</main>
 		);
@@ -106,7 +119,31 @@ class LoginComponent extends Component {
 				break;
 		}
 	};
-
+	fbLogin = () =>{
+		fire
+			.auth()
+			.signInWithPopup(this.provider2)
+			.then(res => {
+				const userObj = {
+					email: res.user.email,
+					name: res.user.displayName
+				};
+				fire
+					.firestore()
+					.collection("users")
+					.doc(res.user.email)
+					.set(userObj)
+					.then(
+						() => {
+							this.props.history.push("/dashboard");
+						},
+						dbError => {
+							console.log(dbError);
+						}
+					);
+				this.props.history.push("/dashboard");
+			});
+	}
 	googleLogin = () => {
 		fire
 			.auth()

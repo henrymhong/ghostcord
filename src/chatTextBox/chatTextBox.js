@@ -4,6 +4,10 @@ import Send from "@material-ui/icons/Send";
 import Attach from "@material-ui/icons/PhotoSizeSelectActual";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 function buildFileSelector() {
 	const fileSelector = document.createElement("input");
@@ -11,6 +15,16 @@ function buildFileSelector() {
 	fileSelector.setAttribute("multiple", "multiple");
 	return fileSelector;
 }
+const useStyles = makeStyles(theme => ({
+	root: {
+	  '& > *': {
+		margin: theme.spacing(1),
+	  },
+	},
+	input: {
+	  display: 'none',
+	},
+  }));
 
 class ChatTextBoxComponent extends React.Component {
 	constructor() {
@@ -26,17 +40,20 @@ class ChatTextBoxComponent extends React.Component {
 	handleFileSelect = e => {
 		e.preventDefault();
 		this.fileSelector.click();
+		alert(this.fileSelector.addEventListener);
 	};
 
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<div className={classes.chatTextBoxContainer}>
-				<Attach
-					onClick={this.handleFileSelect}
-					className={classes.attachBtn}
-				></Attach>
+				<input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+      <label htmlFor="icon-button-file">
+        <IconButton color="primary" aria-label="upload picture" component="span">
+          <PhotoCamera />
+        </IconButton>
+      </label>
+
 				<TextField
 					placeholder="Type your message.."
 					onKeyUp={e => this.userTyping(e)}

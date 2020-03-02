@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import fire, { storage } from "../config/fire";
+import fire, { db } from "../config/fire";
 import { Link } from "react-router-dom";
 
 export default class EditProfileComponent extends Component {
 
-    state = {
-		image: null,
-		url: "",
-		user: "",
-    }
-    
-    constructor(props) {
-        super(props);
-        
-        this.handleChange = this.handleChange.bind(this);
-		this.handleUpload = this.handleUpload.bind(this);
+	
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			image: null,
+			url: "",
+			user: "",
+			name: "",
+			avatar: ""
+		};
+
+		this.userTyping = this.userTyping.bind(this);
+		this.update = this.update.bind(this);
     }
 
     componentDidMount() {
@@ -37,18 +40,76 @@ export default class EditProfileComponent extends Component {
 		else {
 			console.log("user not found");
 		}
-    }
-    
-    handleChange = e => {
-		if (e.target.files[0]) {
-			const image = e.target.files[0];
-			this.setState(() => ({ image }));
-		}
 	};
 
-	handleUpload = () => {
+	componentDidUpdate() {
+		var user = fire.auth().currentUser;
+		if(user != null) {
+			fire.firestore()
+				.collection('users')
+				.where("email", "==", user.email)
+				.get()
+				.then(snapshot => {
+					var user = "";
+					snapshot.forEach(doc => {
+						var data = doc.data();
+						user = data;
+					});
+					this.setState({ user: user });
+				})
+				.catch(error => console.log(error));
+		}
+		else {
+			console.log("user not found");
+		}
+	};
+	
+	userTyping = (type, e) => {
+		switch (type) {
+			case "name":
+				this.setState({ name: e.target.value });
+				break;
+			case "avatar":
+				// this.setState({ avatar: e.target.value });
+				if (e.target.files[0]) {
+					const image = e.target.files[0];
+					this.setState(() => ({ image }));
+				}
+				break;
+			default:
+				break;
+		}
+	};
+	
+	//	retrieves document id 
+	// getId(user) {
+	// 	console.log("in getId")
+	// 	fire.firestore()
+	// 		.collection('users')
+	// 		.get()
+	// 		.then(snapshot => {
+	// 		console.log("got snapshot: ", snapshot);
+	// 		console.log("user: ", user);
+	// 		snapshot.docs.forEach((doc) => {
+	// 			if(doc === user) {
+	// 				console.log("id found: ", doc.id);
+	// 			}
+	// 		})
+	// 	})
+	// }
+
+	update = (e) => {
+		e.preventDefault();
+
+		// updating the user's name
+		fire.firestore().collection('users').doc(fire.auth().currentUser.email).update({
+			name: this.state.name
+		});
+
+		// updating the user's avatar
 		const { image } = this.state;
-		const uploadTask = storage.ref(`images/${image.name}`).put(image);
+		const uploadTask = db.ref(`images/${image.name}`).put(image);
+		console.log("updating picture");
 		uploadTask.on(
 			"state_changed",
 			snapshot => {},
@@ -56,14 +117,14 @@ export default class EditProfileComponent extends Component {
 				console.log(error);
 			},
 			() => {
-				storage
+				db
 					.ref("images")
 					.child(image.name)
 					.getDownloadURL()
 					.then(url => {
-						console.log(url);
 						this.setState({ url });
 						// storing in firebase
+						console.log("storing file in the firebase")
 						fire
 							.firestore()
 							.collection("users")
@@ -72,6 +133,10 @@ export default class EditProfileComponent extends Component {
 					});
 			}
 		);
+
+
+		alert("Profile saved successfully!");
+		this.props.history.push("/profile")
 	};
 
     render() {
@@ -79,31 +144,44 @@ export default class EditProfileComponent extends Component {
             <div>
                 <h1>Edit Page</h1>
                 <form>
+					<div>
+						<label>Name:</label>
+						<input 
+							placeholder={this.state.user.name}
+							onChange={ e => {
+								this.userTyping("name", e);
+							}}
+						/>
+					</div>
+					
                     <div>
-                        <input type="file" onChange={this.handleChange} />
-                        <button onClick={this.handleUpload}>Set Profile Picture</button>
+						<label>Avatar:</label>
+                        <input type="file" onChange={ e => {this.userTyping("avatar", e)}}/>
+                        {/* <button onClick={this.handleUpload}>Set Profile Picture</button> */}
                         <br />
                         <img
-                            src={this.state.url || "http://via.placeholder.com/400x300"}
+                            src={this.state.url}
                             alt="Uploaded"
                             width="85"
                             height="85"
                         />
                         <br/>
-                        <label>
-                            Name:
-                        </label>
-                        <input placeholder={this.state.user.name}/>
                     </div>
+
                     <div>
+                        <input type="submit" value="Save" onClick={this.update}/>
+                    </div>
+                    {/* <div>
                         <label>
                             Email:
                         </label>
-                        <input placeholder={this.state.user.email}/>
-                    </div>
-                    <div>
-                        <input type="submit" value="Save"/>
-                    </div>
+						<input 
+							placeholder={this.state.user.email}
+							onChange={e => {
+								this.userTyping("email", e)
+							}}
+						/>
+                    </div> */}
                 </form>
             </div>
         )

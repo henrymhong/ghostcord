@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import fire, { storage, db } from "../config/fire";
+import fire, { db } from "../config/fire";
 import { Link } from "react-router-dom";
 
 // import { makeStyles } from "@material-ui/core/styles";
@@ -41,9 +41,10 @@ export default class ProfileComponent extends Component {
 			image: null,
 			url: "",
 			user: ""
+
 		};
 	}
-
+	
 	componentDidMount() {
 		var user = fire.auth().currentUser;
 		if(user != null) {
@@ -66,11 +67,35 @@ export default class ProfileComponent extends Component {
 		else {
 			console.log("user not found");
 		}
-	}
+	};
+
+	componentDidUpdate() {
+		var user = fire.auth().currentUser;
+		if(user != null) {
+			fire.firestore()
+				.collection('users')
+				.where("email", "==", user.email)
+				.get()
+				.then(snapshot => {
+					var user = "";
+					snapshot.forEach(doc => {
+						var data = doc.data();
+						user = data;
+					});
+					this.setState({ user: user });
+				})
+				.catch(error => console.log(error));
+		}
+		else {
+			console.log("user not found");
+		}
+	};
 
 	render() {
 		return (
 			<div>
+				<Link onClick={ () => this.props.history.push("/dashboard") }>Home</Link>
+				<br/>
 				<img 
 					src={this.state.user.avatar} 
 					width="85"

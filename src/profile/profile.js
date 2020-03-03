@@ -1,39 +1,12 @@
 import React, { Component } from "react";
 import fire, { db } from "../config/fire";
 import { Link } from "react-router-dom";
+import { Avatar, Paper, Button } from '@material-ui/core';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import styles from './styles';
+import withStyles from "@material-ui/core/styles/withStyles";
 
-// import { makeStyles } from "@material-ui/core/styles";
-// import Paper from "@material-ui/core/Paper";
-// import Avatar from "@material-ui/core/Avatar";
-
-// const useStyles = makeStyles(theme => ({
-// 	root: {
-// 		display: "flex",
-// 		flexWrap: "wrap",
-// 		"& > *": {
-// 			margin: theme.spacing(5, 15),
-// 			width: theme.spacing(100),
-// 			height: theme.spacing(100)
-// 		},
-// 		paper: {
-// 			display: "flex",
-// 			margin: theme.spacing(5, 5)
-// 		}
-// 	}
-// }));
-
-// export default function SimplePaper() {
-// 	const classes = useStyles();
-//   return (
-//     <div className={classes.root}>
-//     	<Paper elevation={5}>
-// 				<Avatar className={classes.paper}/>
-// 		</Paper>
-//     </div>
-//   );
-// }
-
-export default class ProfileComponent extends Component {
+class ProfileComponent extends Component {
 	
 	constructor(props) {
 		super(props);
@@ -43,6 +16,46 @@ export default class ProfileComponent extends Component {
 			user: ""
 
 		};
+	}
+
+	render() {
+		const { classes } = this.props;
+
+		return (
+			<main className={classes.main}>
+				<CssBaseline />
+				<Paper className={classes.paper}>
+					<br/>
+					<Avatar 
+						src={this.state.user.avatar} 
+						width="150"
+						height="150" 
+						alt="profile pic"
+						className={classes.large}
+					/>
+					<h1>{this.state.user.name}</h1>
+					<h2>{ this.state.user.email }</h2>
+					<Button
+						variant="contained" 
+						color="primary"
+						fullWidth 
+						onClick={ () => this.props.history.push("/dashboard") }
+						className={classes.submit}
+					>
+						Back
+					</Button>
+					<Button 
+						onClick={ () => this.props.history.push("/profile/edit") }
+						variant="contained" 
+						color="primary"
+						fullWidth
+						className={classes.submit}
+					>
+						Edit
+					</Button>
+				</Paper>
+			</main>
+		);
 	}
 	
 	componentDidMount() {
@@ -90,22 +103,6 @@ export default class ProfileComponent extends Component {
 			console.log("user not found");
 		}
 	};
-
-	render() {
-		return (
-			<div>
-				<Link onClick={ () => this.props.history.push("/dashboard") }>Home</Link>
-				<br/>
-				<img 
-					src={this.state.user.avatar} 
-					width="85"
-					height="85" 
-					alt="profile pic"
-				/>
-				<h1>{this.state.user.name}</h1>
-				<h2>{ this.state.user.email }</h2>
-				<Link to="/profile/edit">Edit</Link>
-			</div>
-		);
-	}
 }
+
+export default withStyles(styles)(ProfileComponent);

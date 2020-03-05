@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { auth } from "../config/fire";
 import {
   Route,
@@ -9,14 +9,7 @@ import {
 import LoginComponent from "./Login";
 import RegisterComponent from "./Register";
 import HomeComponent from "./Home";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/core/styles";
-
-const theme = createMuiTheme({
-  palette: {
-    type: "light"
-  }
-});
+import GlobalContext from "../state/State";
 
 const authRouting = (
   <Router>
@@ -43,6 +36,7 @@ const RoutingComponent = () => {
   useEffect(() => {
     auth.onAuthStateChanged(res => {
       if (res) {
+        console.log(res);
         setUser(res);
       } else {
         setUser(null);

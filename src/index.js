@@ -11,6 +11,7 @@ import EditProfileComponent from "./profile/editProfile";
 import FriendsComponent from "./friends/friends";
 import AboutComponent from "./about/about";
 import VideoRoomComponent from "./videoroom/videoroom";
+import WhiteBoardComponent from "./whiteboard/whiteboard";
 
 const routing = (
 	<Router>
@@ -22,6 +23,7 @@ const routing = (
 			<Route path="/friends" component={FriendsComponent}></Route>
 			<Route exact path="/profile" component={ProfileComponent}></Route>
 			<Route path ="/profile/edit" component={EditProfileComponent}></Route>
+			<Route path="/whiteboard" component={WhiteBoardComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
 			<Route path="/videoroom" component={VideoRoomComponent}></Route>
 		</div>

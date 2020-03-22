@@ -23,7 +23,7 @@ const styles = theme => ({
 	},
 	aboutBtn: {
 		position: "absolute",
-		bottom: "105px",
+		bottom: "140px",
 		left: "0px",
 		width: "300px",
 		borderRadius: "0px",
@@ -39,6 +39,17 @@ const styles = theme => ({
 		width: "300px",
 		borderRadius: "0px",
 		backgroundColor: "#FFA500",
+		height: "35px",
+		boxShadow: "0px 0px 2px black",
+		color: "white"
+	},
+	whiteboardBtn: {
+		position: "absolute",
+		bottom: "105px",
+		left: "0px",
+		width: "300px",
+		borderRadius: "0px",
+		backgroundColor: "#273c75",
 		height: "35px",
 		boxShadow: "0px 0px 2px black",
 		color: "white"

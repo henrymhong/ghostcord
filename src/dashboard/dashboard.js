@@ -66,6 +66,12 @@ class DashboardComponent extends React.Component {
 						Friends
 					</Button>
 					<Button
+						onClick={() => this.props.history.push("/whiteboard")}
+						className={classes.whiteboardBtn}
+					>
+						White Board
+					</Button>
+					<Button
 						onClick={() => this.props.history.push("/profile")}
 						className={classes.profileBtn}
 					>

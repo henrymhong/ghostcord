@@ -1,76 +1,114 @@
 import React, { Component } from 'react';
-import { SketchField, Tools } from 'react-sketch';
-import io from 'socket.io-client';
-
+import { v4 } from 'uuid';
+import Pusher from 'pusher-js';
 class Canvas extends Component {
+  constructor(props) {
+    super(props);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.endPaintEvent = this.endPaintEvent.bind(this);
 
-    constructor(props) {
-        super(props);
-        // this.state = {
-        //     isMouseDown: false
-        // }
+    this.pusher = new Pusher('9b3b99b8f0cbd329daea', {
+        cluster: 'us3',
+    });
+  }
+  isPainting = false;
 
-        this._onMouseMove = this._onMouseMove.bind(this);
+  userStrokeStyle = '#EE92C2';
+  guestStrokeStyle = '#F0C987';
+  line = [];
+  // v4 creates a unique id for each user. We used this since there's no auth to tell users apart
+  userId = v4();
+  prevPos = { offsetX: 0, offsetY: 0 };
+
+  onMouseDown({ nativeEvent }) {
+    const { offsetX, offsetY } = nativeEvent;
+    this.isPainting = true;
+    this.prevPos = { offsetX, offsetY };
+  }
+
+  onMouseMove({ nativeEvent }) {
+    if (this.isPainting) {
+      const { offsetX, offsetY } = nativeEvent;
+      const offSetData = { offsetX, offsetY };
+      const positionData = {
+        start: { ...this.prevPos },
+        stop: { ...offSetData },
+      };
+      this.line = this.line.concat(positionData);
+      this.paint(this.prevPos, offSetData, this.userStrokeStyle);
     }
+  }
 
-    isMouseDown = false;
-
-    // // creating a variable named socket
-    socket;
-
-    // componentDidMount() {
-    //     this.socket = io.connect('http://localhost:4000')
-    // }
-
-    // when mouse is clicked
-    _onMouseDown = (e) => {
-        // this.setState({isMouseDown: true});
-        this.isMouseDown = true;
+  endPaintEvent() {
+    if (this.isPainting) {
+      this.isPainting = false;
+      this.sendPaintData();
     }
+  }
 
-    // getting the X and Y positions when mouse is dragged, then send data to the socket
-    _onMouseMove = (e) => {
-        if(this.isMouseDown === true) {
-            const width = this.refs.whiteboard.clientWidth;
-            const height = this.refs.whiteboard.clientHeight;
-            const oX = e.nativeEvent.offsetX;
-            const oY = e.nativeEvent.offsetY;
+  paint(prevPos, currPos, strokeStyle) {
+    const { offsetX, offsetY } = currPos;
+    const { offsetX: x, offsetY: y } = prevPos;
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = strokeStyle;
+    this.ctx.moveTo(x, y);
+    this.ctx.lineTo(offsetX, offsetY);
+    this.ctx.stroke();
+    this.prevPos = { offsetX, offsetY };
+  }
 
-            console.log(Math.floor(oX), Math.floor(oY));
+  async sendPaintData() {
+      console.log('send paint data')
+    const body = {
+      line: this.line,
+      userId: this.userId,
+    };
 
-            var data = { 
-                x: oX,
-                y: oY
-            }
+    const req = await fetch('http://localhost:4000/paint', {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+    const res = await req.json();
+    this.line = [];
+  }
 
-            // this.socket.emit('mouse', data);
-        }
-    }
+  componentDidMount() {
 
-    _onMouseUp = () => {
-        // this.setState({isMouseDown: false});
-        this.isMouseDown = false;
-    }
+    this.canvas.width = 1000;
+    this.canvas.height = 800;
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.lineJoin = 'round';
+    this.ctx.lineCap = 'round';
+    this.ctx.lineWidth = 5;
 
-    render() {
+    const channel = this.pusher.subscribe('painting');
+    console.log('this is the channel: ', channel);
+    channel.bind('draw', (data) => {
+        console.log('data in bind: ', data);   
+      const { userId, line } = data;
+      if (userId !== this.userId) {
+        line.forEach((position) => {
+          this.paint(position.start, position.stop, this.guestStrokeStyle);
+        });
+      }
+    });
+  }
 
-        return (
-            <div className="whiteboard"
-            onMouseMove={ this._onMouseMove }
-            onMouseDown={ this._onMouseDown }
-            onMouseUp={ this._onMouseUp }
-            ref="whiteboard"
-            >
-                <SketchField
-                width='975px'
-                height='650px'
-                tool={Tools.Pencil}
-                lineColor='black'
-                lineWidth={3}
-                backgroundColor='#dcdde1'
-                />
-            </div>
-        );
-    }
+  render() {
+    return (
+      <canvas
+        ref={(ref) => (this.canvas = ref)}
+        style={{ background: 'black' }}
+        onMouseDown={this.onMouseDown}
+        onMouseLeave={this.endPaintEvent}
+        onMouseUp={this.endPaintEvent}
+        onMouseMove={this.onMouseMove}
+      />
+    );
+  }
 }
 export default Canvas;

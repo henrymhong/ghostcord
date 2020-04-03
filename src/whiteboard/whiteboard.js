@@ -11,22 +11,22 @@ class WhiteBoardComponent extends Component {
             <Fragment>
                 <h3 style={{ textAlign: 'center' }}>Welcome to the Whiteboard</h3>
                 <div className="main">
-                <div className="color-guide">
-                    <h5>Color Guide</h5>
-                    <div className="user user">User</div>
-                    <div className="user guest">Guest</div>
-                    <div>
-                        <Button 
-                            variant="contained" 
-                            color="primary"  
-                            fullWidth
-                            onClick={() => this.props.history.push("/dashboard")}
-                        >
-                            Home
-                        </Button>
+                    <div className="color-guide">
+                        <h5>Color Guide</h5>
+                        <div className="user user">User</div>
+                        <div className="user guest">Guest</div>
+                        <div>
+                            <Button 
+                                variant="contained" 
+                                color="primary"  
+                                fullWidth
+                                onClick={() => this.props.history.push("/dashboard")}
+                            >
+                                Home
+                            </Button>
+                        </div>
                     </div>
-                </div>
-                <Canvas />
+                    <Canvas />
                 </div>
             </Fragment>
         );

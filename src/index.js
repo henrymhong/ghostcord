@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
-import LoginComponent from "./login/login";
-import SignupComponent from "./signup/signup";
+import HomePageComponent from "./homepage/homepage";
+// import LoginComponent from "./login/login";
+// import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
 import ProfileComponent from "./profile/profile";
 import EditProfileComponent from "./profile/editProfile";
@@ -17,8 +18,9 @@ const routing = (
 	<Router>
 		<div id="routing-container">
 			<Redirect exact from="/" to="/login" />
-			<Route path="/login" component={LoginComponent}></Route>
-			<Route path="/signup" component={SignupComponent}></Route>
+			<Route exact path="/" component={HomePageComponent}></Route>
+			<Route path="/login" component={HomePageComponent}></Route>
+			<Route path="/signup" component={HomePageComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>
 			<Route path="/friends" component={FriendsComponent}></Route>
 			<Route exact path="/profile" component={ProfileComponent}></Route>

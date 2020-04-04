@@ -1,25 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import styles from "./styles";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import Paper from "@material-ui/core/Paper";
-import withStyles from "@material-ui/core/styles/withStyles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import fire from "../config/fire";
-import GoogleButton from "react-google-button";
-import "./login.css";
-import firebase from "firebase/app";
+import React, { Component } from 'react';
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { InstagramLoginButton } from "react-social-login-buttons";
+import fire from "../config/fire";
+import firebase from "firebase/app";
+class LoginForm extends Component{
 
-
-class LoginComponent extends Component {
-	constructor() {
+    constructor() {
 		super();
 		this.provider = new firebase.auth.GoogleAuthProvider();
 		this.provider2 = new firebase.auth.FacebookAuthProvider();
@@ -28,86 +15,67 @@ class LoginComponent extends Component {
 			password: null,
 			serverError: false
 		};
-	}
-	
-	
-	render() {
-		const { classes } = this.props;
+    }
+    
+    render () {
+        return(
+            <div className="FormCenter">
+                <form className="FormFields" onSubmit={e => this.submitLogin(e)}>
 
-		return (
-			<main className={classes.main}>
-				<CssBaseline />
-				<Paper className={classes.paper}>
-					<Typography component="h1" variant="h5">
-						Welcome
-					</Typography>
-					<form className={classes.form} onSubmit={e => this.submitLogin(e)}>
-						<FormControl required fullWidth margin="normal">
-							<InputLabel htmlFor="login-email-input">
-								Enter Your Email
-							</InputLabel>
-							<Input
-								autoComplete="email"
-								autoFocus
-								onChange={e => this.userTyping("email", e)}
-								id="login-email-input"
-							></Input>
-						</FormControl>
-						<FormControl required fullWidth margin="normal">
-							<InputLabel htmlFor="login-password-input">
-								Enter Your Password
-							</InputLabel>
-							<Input
-								autoComplete="current-password"
-								type="password"
-								onChange={e => this.userTyping("password", e)}
-								id="login-password-input"
-							></Input>
-						</FormControl>
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							color="primary"
-							className={classes.submit}
-						>
-							Log In
-						</Button>
-					</form>
-					{this.state.serverError ? (
-						<Typography
-							className={classes.errorText}
-							component="h5"
-							variant="h6"
-						>
-							Incorrect Login Information
-						</Typography>
+                    <div className="FormField">
+                        <label className="FormField__Label" htmlFor="signup-email-input">Email</label>
+                        <input 
+                        autoComplete="email"
+                        id="login-email-input"
+                        className="FormField__Input"
+                        onChange={e => {
+                            this.userTyping("email", e);
+                        }}/>
+                    </div>
+
+                    <div className="FormField">
+                        <label className="FormField__Label" htmlFor="signup-password-input">Password</label>
+                        <input
+                        type="password" 
+                        autoComplete="password"
+                        id="login-password-input"
+                        className="FormField__Input"
+                        onChange={e => {
+                            this.userTyping("password", e);
+                        }}/>
+                    </div>
+
+                    <div className="FormField">
+                        <button className="FormField__Button">Login</button>
+                    </div>
+
+                </form>
+                {this.state.serverError ? (
+						<h5
+                        className="txt_error"
+                        >Incorrect Information</h5>
 					) : null}
-					<h5 className={classes.noAccountHeader}>Don't Have An Account?</h5>
-					<Link className={classes.signUpLink} to="/signup">
-						Sign Up!
-					</Link>
-					<Link className={classes.signUpLink} to="/videoroom">
-						Video
-					</Link>
-				</Paper>
-				<GoogleLoginButton 
-					onClick={() => this.googleLogin()}
-					align
-				/>
-				<FacebookLoginButton 
-				onClick={() => this.fbLogin()}
-				align
-				/>
-				<InstagramLoginButton 
-					onClick={() => this.googleLogin()}
-					align
-				/>
-			</main>
-		);
-	}
 
-	userTyping = (type, event) => {
+                <div className="social_button">
+								<GoogleLoginButton
+									onClick={() => this.googleLogin()}
+									
+								><span></span></GoogleLoginButton>
+								<FacebookLoginButton 
+									onClick={() => this.fbLogin()}
+									
+								><span></span>
+								</FacebookLoginButton>
+								<InstagramLoginButton 
+									onClick={() => this.googleLogin()}
+		
+								><span></span>
+								</InstagramLoginButton>
+				</div>
+            </div>
+        )
+    }
+    userTyping = (type, event) => {
 		switch (type) {
 			case "email":
 				this.setState({ email: event.target.value });
@@ -188,4 +156,7 @@ class LoginComponent extends Component {
 	};
 }
 
-export default withStyles(styles)(LoginComponent);
+
+
+
+export default LoginForm;

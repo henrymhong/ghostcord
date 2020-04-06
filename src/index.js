@@ -4,6 +4,7 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import HomePageComponent from "./homepage/homepage";
+import SignUpComponent from "./signup/SignUpForm"
 // import LoginComponent from "./login/login";
 // import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";

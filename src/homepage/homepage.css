@@ -15,6 +15,9 @@
   .App__Aside {
     width: 45%;
     background-color: #184a46;
+    Display: flex;
+    Align-Items: center;
+    Justify-Content: center;
   }
   
   .App__Form {
@@ -133,4 +136,8 @@
 .txt_error {
   color: red;
   text-align: left;
+}
+
+.homepage_logo {
+  width:50%;
 }

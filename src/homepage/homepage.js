@@ -93,7 +93,9 @@ class HomePageComponent extends Component {
 
 
 					<div className="App">
-						<div className="App__Aside"></div>
+						<div className="App__Aside">
+							<img src={require('../logo/logo.png')} className="homepage_logo"/>
+						</div>
 						<div className="App__Form">
 							<div className = "PageSwitcher">
 							</div>

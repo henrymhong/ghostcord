@@ -3,6 +3,7 @@ const styles = theme => ({
 		height: "calc(100vh - 100px)",
 		overflow: "auto",
 		padding: "25px",
+
 		marginLeft: "300px",
 		boxSizing: "border-box",
 		overflowY: "scroll",

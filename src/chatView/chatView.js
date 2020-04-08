@@ -69,14 +69,13 @@ class ChatViewComponent extends React.Component {
 										}
 									>
 										{msg.type === 0 &&
-											<div style={{ fontSize: "15px", width: '300px'}}>
+											<div style={{ fontSize: "15px", width: '250px'}}>
 												{msg.message}
 											</div>
 										}
 										{msg.type === 1 &&
 											<div>
 												<img
-
 												style={{width: '100%', height: '300px'}}
                                     			src={msg.message}
                                     			alt="content message"

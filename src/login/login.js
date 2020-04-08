@@ -5,6 +5,7 @@ import { InstagramLoginButton } from "react-social-login-buttons";
 import { TwitterLoginButton } from "react-social-login-buttons";
 import fire from "../config/fire";
 import firebase from "firebase/app";
+import {AppString} from './../Const'
 class LoginForm extends Component{
 
     constructor() {
@@ -112,6 +113,9 @@ class LoginForm extends Component{
 						},
 						dbError => {
 							console.log(dbError);
+						},
+						data => {
+							localStorage.setItem(AppString.PHOTO_URL, res.user.photoURL)
 						}
 					);
 				this.props.history.push("/dashboard");
@@ -162,6 +166,9 @@ class LoginForm extends Component{
 						},
 						dbError => {
 							console.log(dbError);
+						},
+						data => {
+							localStorage.setItem(AppString.PHOTO_URL, res.user.photoURL)
 						}
 					);
 				this.props.history.push("/dashboard");

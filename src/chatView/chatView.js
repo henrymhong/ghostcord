@@ -3,6 +3,12 @@ import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
 class ChatViewComponent extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			message: ''
+		}
+	}
 	componentDidMount = () => {
 		const container = document.getElementById("chatview-container");
 		if (container) container.scrollTo(0, container.scrollHeight); // scroll to to the bottom
@@ -41,20 +47,48 @@ class ChatViewComponent extends React.Component {
 						{this.props.chat.messages.map((msg, index) => {
 							// map all messages
 							return (
-								<div
+								<div>
+									<div
 									key={index}
-									className={
-										// if user sent it give it user sent class, and otherwise for friend
-										msg.sender === this.props.userEmail
-											? classes.userSent
-											: classes.friendSent
-									}
-								>
-									{msg.message}
-									<div style={{ fontSize: "10px", paddingTop: 5 }}>
-										{new Date(msg.timestamp).toLocaleString()}
+										className={
+											// if user sent it give it user sent class, and otherwise for friend
+											msg.sender === this.props.userEmail
+												? classes.userSender
+												: classes.friendSender
+										}
+									>
+										{msg.sender}
+									</div>
+									<div
+										key={index}
+										className={
+											// if user sent it give it user sent class, and otherwise for friend
+											msg.sender === this.props.userEmail
+												? classes.userSent
+												: classes.friendSent
+										}
+									>
+										{msg.type === 0 &&
+											<div style={{ fontSize: "15px", width: '300px'}}>
+												{msg.message}
+											</div>
+										}
+										{msg.type === 1 &&
+											<div>
+												<img
+
+												style={{width: '100%', height: '300px'}}
+                                    			src={msg.message}
+                                    			alt="content message"
+                                				/>
+											</div>
+										}
+										<div style={{ fontSize: "10px", paddingTop: 5 }}>
+											{new Date(msg.timestamp).toLocaleString()}
+										</div>
 									</div>
 								</div>
+
 							);
 						})}
 					</main>
@@ -63,6 +97,9 @@ class ChatViewComponent extends React.Component {
 		} else {
 			return <div className="chatview-container">Loading...</div>;
 		}
+	}
+	renderMsg = (msg) => {
+		
 	}
 }
 

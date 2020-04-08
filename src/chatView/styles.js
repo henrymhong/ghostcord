@@ -10,6 +10,27 @@ const styles = theme => ({
 		width: "calc(100% - 300px)",
 		position: "absolute"
 	},
+	userSender: {
+		float: "right",
+		clear: "both",
+		boxSizing: "border-box",
+		wordWrap: "break-word",
+		marginLeft: "5px",
+		marginTop: "10px",
+		color: "black",
+		width: "300px"
+	},
+
+	friendSender: {
+		float: "left",
+		clear: "both",
+		boxSizing: "border-box",
+		wordWrap: "break-word",
+		marginLeft: "5px",
+		marginTop: "10px",
+		color: "black",
+		width: "300px"
+	},
 
 	userSent: {
 		float: "right",
@@ -18,7 +39,7 @@ const styles = theme => ({
 		boxSizing: "border-box",
 		wordWrap: "break-word",
 		marginTop: "10px",
-		backgroundColor: "#455A43",
+		background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
 		color: "white",
 		width: "300px",
 		borderRadius: "10px"
@@ -31,7 +52,7 @@ const styles = theme => ({
 		boxSizing: "border-box",
 		wordWrap: "break-word",
 		marginTop: "10px",
-		backgroundColor: "#707BC4",
+		background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
 		color: "white",
 		width: "300px",
 		borderRadius: "10px"

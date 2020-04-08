@@ -89,7 +89,7 @@ class DashboardComponent extends React.Component {
 
 	signOut = () => fire.auth().signOut();
 
-	submitMessage = msg => {
+	submitMessage = (msg,Type) => {
 		const docKey = this.makeChatID(
 			this.state.chats[this.state.selectedChat].users.filter(
 				_usr => _usr !== this.state.email
@@ -103,7 +103,8 @@ class DashboardComponent extends React.Component {
 				messages: firebase.firestore.FieldValue.arrayUnion({
 					sender: this.state.email,
 					message: msg,
-					timestamp: Date.now()
+					timestamp: Date.now(),
+					type: Type
 				}),
 				receiverHasRead: false
 			});

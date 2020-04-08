@@ -57,7 +57,16 @@ class ChatViewComponent extends React.Component {
 												: classes.friendSender
 										}
 									>
-										{msg.sender}
+										{msg.sender === this.props.userEmail &&
+											<div>
+												{'You'}
+											</div>
+										}
+										{msg.sender !== this.props.userEmail &&
+											<div>
+												{msg.sender}
+											</div>
+										}
 									</div>
 									<div
 										key={index}

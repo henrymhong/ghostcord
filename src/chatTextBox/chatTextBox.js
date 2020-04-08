@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import fire, { db } from "../config/fire";
+import images from '../Themes/Images'
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import './chatTextBox.css'
 
 
 class ChatTextBoxComponent extends React.Component {
@@ -16,15 +19,20 @@ class ChatTextBoxComponent extends React.Component {
 		super();
 		this.state = {
 			chatText: "",
-			
+			isShowSticker: false
 		}
 		this.image = null
 		
+	}
+	handleToggle = ()=> {
+		alert("Click!");
 	}
 	render() {
 		const { classes } = this.props;
 		return (
 			<div className={classes.chatTextBoxContainer}>
+				{/* Stickers */}
+                {this.state.isShowSticker ? this.renderStickers() : null}
 				<input
                     accept="image/*"
                     className={classes.input}
@@ -38,6 +46,10 @@ class ChatTextBoxComponent extends React.Component {
                         <PhotoCamera />
                     </IconButton>
                 </label>
+				<IconButton color="primary" component="span" onClick={() => this.renderStickers}>
+                    <InsertEmoticonIcon/>
+                </IconButton>
+
 				<TextField
 					placeholder="Type your message.."
 					onKeyUp={e => this.userTyping(e)}
@@ -49,6 +61,69 @@ class ChatTextBoxComponent extends React.Component {
 			</div>
 		);
 	}
+	openListSticker = () => {
+        this.setState({isShowSticker: !this.state.isShowSticker})
+    }
+	renderStickers = () => {
+        return (
+            <div className="viewStickers">
+                <img
+                    className="imgSticker"
+                    src={images.mimi1}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi1', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi2}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi2', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi3}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi3', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi4}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi4', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi5}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi5', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi6}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi6', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi7}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi7', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi8}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi8', 2)}
+                />
+                <img
+                    className="imgSticker"
+                    src={images.mimi9}
+                    alt="sticker"
+                    onClick={() => this.onSendMessage('mimi9', 2)}
+                />
+            </div>
+        )
+    }
 	userTyping = e =>
 		e.keyCode === 13
 			? this.submitMessage()

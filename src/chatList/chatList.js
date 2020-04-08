@@ -98,10 +98,10 @@ class ChatListComponent extends React.Component {
 											secondary={
 												<React.Fragment>
 													<Typography component="span" color="textPrimary">
-														{// display the last 30 characters of the last message
+														{// display the last 26 characters of the last message
 														chat.messages[
 															chat.messages.length - 1
-														].message.substring(0, 30) + " ..."}
+														].message.substring(0, 26) + " ..."}
 													</Typography>
 												</React.Fragment>
 											}

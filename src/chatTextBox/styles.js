@@ -8,12 +8,10 @@ const styles = theme => ({
 			color: "gray"
 		}
 	},
-	attachBtn: {
-		color: "black",
-		cursor: "pointer",
-		"&:hover": {
-			color: "gray"
-		}
+	viewInputGallery: {
+		opacity: "0",
+		position: "absolute",
+		width: "30px"
 	},
 	chatTextBoxContainer: {
 		position: "absolute",
@@ -23,9 +21,16 @@ const styles = theme => ({
 		overflow: "auto",
 		width: "calc(100% - 300px - 50px)"
 	},
+	viewInputGallery: {
+		opacity: 0,
+		position: "absolute",
+
+		left: "10px",
+		width: "30px !important" 
+	},
 
 	chatTextBox: {
-		width: "calc(100% - 50px)"
+		width: "calc(100% - 200px)"
 	}
 });
 

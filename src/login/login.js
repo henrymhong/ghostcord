@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { InstagramLoginButton } from "react-social-login-buttons";
+import { TwitterLoginButton } from "react-social-login-buttons";
 import fire from "../config/fire";
 import firebase from "firebase/app";
+import {AppString} from './../Const'
 class LoginForm extends Component{
 
     constructor() {
 		super();
 		this.provider = new firebase.auth.GoogleAuthProvider();
 		this.provider2 = new firebase.auth.FacebookAuthProvider();
+		this.provider2.setCustomParameters({
+			auth_type: 'reauthenticate'
+		});
+		this.provider3 = new firebase.auth.TwitterAuthProvider();
 		this.state = {
 			email: null,
 			password: null,
@@ -66,11 +72,11 @@ class LoginForm extends Component{
 									
 								><span></span>
 								</FacebookLoginButton>
-								<InstagramLoginButton 
-									onClick={() => this.googleLogin()}
+								<TwitterLoginButton 
+									onClick={() => this.twitterLogin()}
 		
 								><span></span>
-								</InstagramLoginButton>
+								</TwitterLoginButton>
 				</div>
             </div>
         )
@@ -91,6 +97,34 @@ class LoginForm extends Component{
 		fire
 			.auth()
 			.signInWithPopup(this.provider2)
+			.then(res => {
+				const userObj = {
+					email: res.user.email,
+					name: res.user.displayName
+				};
+				fire
+					.firestore()
+					.collection("users")
+					.doc(res.user.email)
+					.set(userObj)
+					.then(
+						() => {
+							this.props.history.push("/dashboard");
+						},
+						dbError => {
+							console.log(dbError);
+						},
+						data => {
+							localStorage.setItem(AppString.PHOTO_URL, res.user.photoURL)
+						}
+					);
+				this.props.history.push("/dashboard");
+			});
+	}
+	twitterLogin = () =>{
+		fire
+			.auth()
+			.signInWithPopup(this.provider3)
 			.then(res => {
 				const userObj = {
 					email: res.user.email,
@@ -132,6 +166,9 @@ class LoginForm extends Component{
 						},
 						dbError => {
 							console.log(dbError);
+						},
+						data => {
+							localStorage.setItem(AppString.PHOTO_URL, res.user.photoURL)
 						}
 					);
 				this.props.history.push("/dashboard");

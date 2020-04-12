@@ -1,0 +1,11 @@
+.logo {
+    background-color: #184a46;
+    Display: flex;
+    Align-Items: center;
+    Justify-Content: center;
+}
+
+.logo h1 {
+    color: white;
+    font-size: 100px;
+}

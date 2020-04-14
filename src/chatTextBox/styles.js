@@ -28,7 +28,6 @@ const styles = theme => ({
 		left: "10px",
 		width: "30px !important" 
 	},
-
 	chatTextBox: {
 		width: "calc(100% - 200px)"
 	}

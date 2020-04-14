@@ -87,8 +87,18 @@ class ChatViewComponent extends React.Component {
 												<img
 												style={{width: '100%', height: '300px'}}
                                     			src={msg.message}
-                                    			alt="content message"
+                                    			alt= "cannot load image"
                                 				/>
+											</div>
+										}
+										{msg.type === 2 &&
+											<div>
+												<audio
+													controls
+													src={msg.message}>
+														Your browser does not support the
+														<code>audio</code> element.
+    											</audio>
 											</div>
 										}
 										<div style={{ fontSize: "10px", paddingTop: 5 }}>

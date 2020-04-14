@@ -12,6 +12,8 @@ import fire, { db } from "../config/fire";
 import images from '../Themes/Images'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import './chatTextBox.css'
+import AttachmentIcon from '@material-ui/icons/Attachment';
+
 
 
 class ChatTextBoxComponent extends React.Component {
@@ -22,6 +24,7 @@ class ChatTextBoxComponent extends React.Component {
 			isShowSticker: false
 		}
 		this.image = null
+		this.attachment = null
 		
 	}
 	handleToggle = ()=> {
@@ -49,7 +52,19 @@ class ChatTextBoxComponent extends React.Component {
 				<IconButton color="primary" component="span" onClick={() => this.renderStickers}>
                     <InsertEmoticonIcon/>
                 </IconButton>
-
+				<input
+                    accept="audio/*"
+                    className={classes.input}
+                    id="icon-button-attachment"
+                    onChange={this.onChooseAttachment}
+					type="file"
+					style={{ display: 'none', }}
+                />
+				<label htmlFor="icon-button-attachment">
+					<IconButton color="primary" component="span">
+						<AttachmentIcon/>
+					</IconButton>
+				</label>
 				<TextField
 					placeholder="Type your message.."
 					onKeyUp={e => this.userTyping(e)}
@@ -178,6 +193,49 @@ class ChatTextBoxComponent extends React.Component {
 		}
 
 	}
+	onChooseAttachment = event => {
+        if (event.target.files && event.target.files[0]) {
+            this.attachment = event.target.files[0];
+           	this.uploadAttachment()
+        } else {
+            this.setState({chatText: ''})
+        }
+	}
+	uploadAttachment = () => {
+		if (this.attachment) {
+			const uploadTask = db.ref(`attachments/${this.attachment.name}`).put(this.attachment);
+			console.log("updating attachment");
+			uploadTask.on(
+				"state_changed",
+				snapshot => {},
+				error => {
+					console.log(error);
+				},
+				() => {
+					db
+						.ref("attachments")
+						.child(this.attachment.name)
+						.getDownloadURL()
+						.then(url => {
+							this.setState({ url });
+							// storing in firebase
+							this.setState({chatText : url})
+							this.submitAttachmentMessage()
+						});
+				}
+			);
+	
+			alert("photo sent!");
+		}
+
+	}
+	submitAttachmentMessage = () => {
+		if (this.messageValid(this.state.chatText)) {
+			this.props.submitMessageFn(this.state.chatText,2);
+			document.getElementById("chattextbox").value = "";
+		}
+	};
 }
+
 
 export default withStyles(styles)(ChatTextBoxComponent);

@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import IconButton from '@material-ui/core/IconButton';
+import AttachmentIcon from '@material-ui/icons/Attachment';
+import Button from '@material-ui/core/Button';
 
 class ChatViewComponent extends React.Component {
 	constructor(props){
@@ -93,12 +96,16 @@ class ChatViewComponent extends React.Component {
 										}
 										{msg.type === 2 &&
 											<div>
-												<audio
-													controls
-													src={msg.message}>
-														Your browser does not support the
-														<code>audio</code> element.
-    											</audio>
+												<Button 
+													href={msg.message}
+													target="_blank"
+													variant="outlined" 
+													color="primary"
+													className={classes.button}
+													startIcon={<AttachmentIcon />}
+												>
+													{msg.fileName}
+												</Button>
 											</div>
 										}
 										<div style={{ fontSize: "10px", paddingTop: 5 }}>

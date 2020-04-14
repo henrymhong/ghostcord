@@ -25,6 +25,7 @@ class ChatTextBoxComponent extends React.Component {
 		}
 		this.image = null
 		this.attachment = null
+		this.fileName = null
 		
 	}
 	handleToggle = ()=> {
@@ -53,7 +54,7 @@ class ChatTextBoxComponent extends React.Component {
                     <InsertEmoticonIcon/>
                 </IconButton>
 				<input
-                    accept="audio/*"
+                    accept="media_type"
                     className={classes.input}
                     id="icon-button-attachment"
                     onChange={this.onChooseAttachment}
@@ -153,13 +154,14 @@ class ChatTextBoxComponent extends React.Component {
 	};
 	submitPictureMessage = () => {
 		if (this.messageValid(this.state.chatText)) {
-			this.props.submitMessageFn(this.state.chatText,1);
+			this.props.submitMessageFn(this.state.chatText,1,this.fileName);
 			document.getElementById("chattextbox").value = "";
 		}
 	};
 	onChoosePhoto = event => {
         if (event.target.files && event.target.files[0]) {
-            this.image = event.target.files[0];
+			this.image = event.target.files[0];
+			this.fileName = this.image.name
            	this.uploadPhoto()
         } else {
             this.setState({chatText: ''})
@@ -195,7 +197,8 @@ class ChatTextBoxComponent extends React.Component {
 	}
 	onChooseAttachment = event => {
         if (event.target.files && event.target.files[0]) {
-            this.attachment = event.target.files[0];
+			this.attachment = event.target.files[0];
+			this.fileName = this.attachment.name
            	this.uploadAttachment()
         } else {
             this.setState({chatText: ''})
@@ -225,13 +228,13 @@ class ChatTextBoxComponent extends React.Component {
 				}
 			);
 	
-			alert("photo sent!");
+			alert("attachment sent!");
 		}
 
 	}
 	submitAttachmentMessage = () => {
 		if (this.messageValid(this.state.chatText)) {
-			this.props.submitMessageFn(this.state.chatText,2);
+			this.props.submitMessageFn(this.state.chatText,2,this.fileName);
 			document.getElementById("chattextbox").value = "";
 		}
 	};

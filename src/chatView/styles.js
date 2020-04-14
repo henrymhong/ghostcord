@@ -74,6 +74,10 @@ const styles = theme => ({
 		color: "white",
 		paddingTop: "10px",
 		boxSizing: "border-box"
+	},
+	iconButton: {
+		display: "flex",
+		flexDirection: "column"
 	}
 });
 

@@ -89,7 +89,7 @@ class DashboardComponent extends React.Component {
 
 	signOut = () => fire.auth().signOut();
 
-	submitMessage = (msg,Type) => {
+	submitMessage = (msg,Type,fileName) => {
 		const docKey = this.makeChatID(
 			this.state.chats[this.state.selectedChat].users.filter(
 				_usr => _usr !== this.state.email
@@ -104,7 +104,8 @@ class DashboardComponent extends React.Component {
 					sender: this.state.email,
 					message: msg,
 					timestamp: Date.now(),
-					type: Type
+					type: Type,
+					fileName: fileName
 				}),
 				receiverHasRead: false
 			});

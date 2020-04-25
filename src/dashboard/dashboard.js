@@ -3,6 +3,7 @@ import NewChatComponent from "../newChat/newChat";
 import ChatListComponent from "../chatList/chatList";
 import ChatViewComponent from "../chatView/chatView";
 import ChatTextBoxComponent from "../chatTextBox/chatTextBox";
+import NavBarComponent from "../navBar/navBar";
 import styles from "./styles";
 import { Button, withStyles } from "@material-ui/core";
 import fire from "../config/fire";
@@ -25,61 +26,65 @@ class DashboardComponent extends React.Component {
 
 		if (this.state.email) {
 			return (
-				<div className="dashboard-container" id="dashboard-container">
-					<ChatListComponent
-						history={this.props.history}
-						userEmail={this.state.email}
-						selectChatFn={this.selectChat}
-						chats={this.state.chats}
-						selectedChatIndex={this.state.selectedChat}
-						newChatBtnFn={this.newChatBtnClicked}
-					></ChatListComponent>
-					{this.state.newChatFormVisible ? null : (
-						<ChatViewComponent
+				<div>
+					<NavBarComponent />
+
+					<div className="dashboard-container" id="dashboard-container">
+						<ChatListComponent
+							history={this.props.history}
 							userEmail={this.state.email}
-							chat={this.state.chats[this.state.selectedChat]}
-						></ChatViewComponent>
-					)}
-					{this.state.selectedChat !== null &&
-					!this.state.newChatFormVisible ? (
-						<ChatTextBoxComponent
-							userClickedInputFn={this.messageRead}
-							submitMessageFn={this.submitMessage}
-						></ChatTextBoxComponent>
-					) : null}
-					{this.state.newChatFormVisible ? (
-						<NewChatComponent
-							goToChatFn={this.goToChat}
-							newChatSubmitFn={this.newChatSubmit}
-						></NewChatComponent>
-					) : null}
-					<Button
-						onClick={() => this.props.history.push("/about")}
-						className={classes.aboutBtn}
-					>
-						About
-					</Button>
-					<Button
-						onClick={() => this.props.history.push("/friends")}
-						className={classes.friendsBtn}
-					>
-						Friends
-					</Button>
-					<Button
-						onClick={() => this.props.history.push("/whiteboard")}
-						className={classes.whiteboardBtn}
-					>
-						White Board
-					</Button>
-					<Button
-						onClick={() => this.props.history.push("/profile")}
-						className={classes.profileBtn}
-					>
-						Profile
-					</Button>
-					<Button onClick={this.signOut} className={classes.signOutBtn}>
-						Sign Out
-					</Button>
+							selectChatFn={this.selectChat}
+							chats={this.state.chats}
+							selectedChatIndex={this.state.selectedChat}
+							newChatBtnFn={this.newChatBtnClicked}
+						></ChatListComponent>
+						{this.state.newChatFormVisible ? null : (
+							<ChatViewComponent
+								userEmail={this.state.email}
+								chat={this.state.chats[this.state.selectedChat]}
+							></ChatViewComponent>
+						)}
+						{this.state.selectedChat !== null &&
+						!this.state.newChatFormVisible ? (
+							<ChatTextBoxComponent
+								userClickedInputFn={this.messageRead}
+								submitMessageFn={this.submitMessage}
+							></ChatTextBoxComponent>
+						) : null}
+						{this.state.newChatFormVisible ? (
+							<NewChatComponent
+								goToChatFn={this.goToChat}
+								newChatSubmitFn={this.newChatSubmit}
+							></NewChatComponent>
+						) : null}
+						{/* <Button
+							onClick={() => this.props.history.push("/about")}
+							className={classes.aboutBtn}
+						>
+							About
+						</Button>
+						<Button
+							onClick={() => this.props.history.push("/friends")}
+							className={classes.friendsBtn}
+						>
+							Friends
+						</Button>
+						<Button
+							onClick={() => this.props.history.push("/whiteboard")}
+							className={classes.whiteboardBtn}
+						>
+							White Board
+						</Button>
+						<Button
+							onClick={() => this.props.history.push("/profile")}
+							className={classes.profileBtn}
+						>
+							Profile
+						</Button>
+						<Button onClick={this.signOut} className={classes.signOutBtn}>
+							Sign Out
+						</Button> */}
+					</div>
 				</div>
 			);
 		} else {

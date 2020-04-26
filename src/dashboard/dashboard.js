@@ -27,7 +27,9 @@ class DashboardComponent extends React.Component {
 		if (this.state.email) {
 			return (
 				<div>
-					<NavBarComponent />
+					<div>
+						<NavBarComponent/>
+					</div>
 
 					<div className="dashboard-container" id="dashboard-container">
 						<ChatListComponent

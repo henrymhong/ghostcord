@@ -5,12 +5,14 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import { withStyles } from "@material-ui/core";
 import styles from "./styles";
+import NavBarComponent from "../navBar/navBar";
 
 class AboutComponent extends Component {
 	render() {
 		const { classes } = this.props;
 		return(
 			<div className={classes.root}>
+				<NavBarComponent />
 				<div className="logo">
 					<h1>About Ghostcord</h1>
 					<img src={require('../logo/logo.png')}/>

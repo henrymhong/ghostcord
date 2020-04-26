@@ -30,7 +30,7 @@ class ChatListComponent extends React.Component {
 					<Button
 						variant="contained"
 						fullWidth
-						color="primary"
+						color="#184a46"
 						onClick={this.newChat}
 						className={classes.newChatBtn}
 					>

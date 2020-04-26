@@ -5,6 +5,7 @@ import { Avatar, Paper, Button } from '@material-ui/core';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import styles from './styles';
 import withStyles from "@material-ui/core/styles/withStyles";
+import NavBarComponent from "../navBar/navBar";
 
 class ProfileComponent extends Component {
 	
@@ -22,39 +23,42 @@ class ProfileComponent extends Component {
 		const { classes } = this.props;
 
 		return (
-			<main className={classes.main}>
-				<CssBaseline />
-				<Paper className={classes.paper}>
-					<br/>
-					<Avatar 
-						src={this.state.user.avatar} 
-						width="150"
-						height="150" 
-						alt="profile pic"
-						className={classes.large}
-					/>
-					<h1>{this.state.user.name}</h1>
-					<h2>{ this.state.user.email }</h2>
-					<Button
-						variant="contained" 
-						color="primary"
-						fullWidth 
-						onClick={ () => this.props.history.push("/dashboard") }
-						className={classes.submit}
-					>
-						Back
-					</Button>
-					<Button 
-						onClick={ () => this.props.history.push("/profile/edit") }
-						variant="contained" 
-						color="primary"
-						fullWidth
-						className={classes.submit}
-					>
-						Edit
-					</Button>
-				</Paper>
-			</main>
+			<div>
+				<NavBarComponent />
+				<main className={classes.main}>
+					<CssBaseline />
+					<Paper className={classes.paper}>
+						<br/>
+						<Avatar 
+							src={this.state.user.avatar} 
+							width="150"
+							height="150" 
+							alt="profile pic"
+							className={classes.large}
+						/>
+						<h1>{this.state.user.name}</h1>
+						<h2>{ this.state.user.email }</h2>
+						<Button
+							variant="contained" 
+							color="primary"
+							fullWidth 
+							onClick={ () => this.props.history.push("/dashboard") }
+							className={classes.submit}
+						>
+							Back
+						</Button>
+						<Button 
+							onClick={ () => this.props.history.push("/profile/edit") }
+							variant="contained" 
+							color="primary"
+							fullWidth
+							className={classes.submit}
+						>
+							Edit
+						</Button>
+					</Paper>
+				</main>
+			</div>
 		);
 	}
 	

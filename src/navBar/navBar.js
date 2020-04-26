@@ -11,7 +11,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import styles from './styles';
 import withStyles from "@material-ui/core/styles/withStyles";
 import fire from "../config/fire";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
 
 class navBar extends Component {
@@ -25,7 +26,9 @@ class navBar extends Component {
             <div className={classes.root}>
             <AppBar position="static" className={classes.color}>
               <Toolbar>
-                <img src={require('../logo/logo.png')} alt="Ghostcord" className={classes.logo}/> 
+                  <Link variant="h6" className={classes.title} to="/dashboard">
+                    <img src={require('../logo/logo.png')} alt="Ghostcord" className={classes.logo} /> 
+                  </Link>
                 <Typography variant="h6" className={classes.title}>
                     <Link  variant="h6" className={classes.title} to="/whiteboard">Whiteboard</Link>
                 </Typography>
@@ -48,5 +51,7 @@ class navBar extends Component {
 	signOut = () => fire.auth().signOut();
 
 }
+// export default withRouter(connect()(withStyles(styles)(navBar)));
 export default withStyles(styles)(navBar);
+
 

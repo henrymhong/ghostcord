@@ -3,7 +3,7 @@ import fire, { db } from "../config/fire";
 import { Link } from "react-router-dom";
 import { Button, Grid, TextField, Paper, Typography, FormControl, InputLabel, Input } from '@material-ui/core';
 import CssBaseline from "@material-ui/core/CssBaseline";
-
+import NavBarComponent from "../navBar/navBar";
 import styles from './styles';
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -30,56 +30,59 @@ class EditProfileComponent extends Component {
 		const { classes } = this.props;
 
         return (
-            <main className={classes.main}>
-				<CssBaseline />
-				<Paper className={classes.paper}>
-					<Typography component="h1" variant="h5">
-						Edit Page
-					</Typography>
-					<form className={classes.form}>
-						<FormControl fullwidth margin="normal">
-							<InputLabel htmlFor="edit-name">
-								Edit Name
-							</InputLabel>	
-							<Input
-								id="edit-name" 
-								placeholder={this.state.user.name}
-								onChange={ e => {this.userTyping("name", e);}}
-							></Input>
-						</FormControl>
-						<FormControl fullwidth margin="normal">
-							<InputLabel htmlFor="edit-avatar">
-								Edit Avatar
-							</InputLabel>
-							<Input
-								id="edit-avatar" 
-								type="file" 
-								onChange={ e => {this.userTyping("avatar", e)}}
-							></Input>
-						</FormControl>	
-						<br/>
-						<Button 
-							variant="contained" 
-							color="primary" 
-							type="submit" 
-							fullWidth
-							onClick={this.update}
-							className={classes.submit}
-						>
-							Save
-						</Button>	
-						<Button 
-							variant="contained" 
-							color="secondary" 
-							fullWidth
-							onClick={() => this.props.history.push("/profile")}
-							className={classes.submit}
-						>
-							Cancel
-						</Button>
-					</form>
-				</Paper>
-            </main>
+			<div>
+				<NavBarComponent />
+				<main className={classes.main}>
+					<CssBaseline />
+					<Paper className={classes.paper}>
+						<Typography component="h1" variant="h5">
+							Edit Page
+						</Typography>
+						<form className={classes.form}>
+							<FormControl fullwidth margin="normal">
+								<InputLabel htmlFor="edit-name">
+									Edit Name
+								</InputLabel>	
+								<Input
+									id="edit-name" 
+									placeholder={this.state.user.name}
+									onChange={ e => {this.userTyping("name", e);}}
+								></Input>
+							</FormControl>
+							<FormControl fullwidth margin="normal">
+								<InputLabel htmlFor="edit-avatar">
+									Edit Avatar
+								</InputLabel>
+								<Input
+									id="edit-avatar" 
+									type="file" 
+									onChange={ e => {this.userTyping("avatar", e)}}
+								></Input>
+							</FormControl>	
+							<br/>
+							<Button 
+								variant="contained" 
+								color="primary" 
+								type="submit" 
+								fullWidth
+								onClick={this.update}
+								className={classes.submit}
+							>
+								Save
+							</Button>	
+							<Button 
+								variant="contained" 
+								color="secondary" 
+								fullWidth
+								onClick={() => this.props.history.push("/profile")}
+								className={classes.submit}
+							>
+								Cancel
+							</Button>
+						</form>
+					</Paper>
+				</main>
+			</div>
         )
     }
 

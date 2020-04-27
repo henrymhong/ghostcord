@@ -12,7 +12,7 @@ import styles from './styles';
 import withStyles from "@material-ui/core/styles/withStyles";
 import fire from "../config/fire";
 import { Link, withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 
 
 class navBar extends Component {

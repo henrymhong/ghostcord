@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AttachmentIcon from '@material-ui/icons/Attachment';
 import Button from '@material-ui/core/Button';
 
+
 class ChatViewComponent extends React.Component {
 	constructor(props){
 		super(props)
@@ -45,6 +46,17 @@ class ChatViewComponent extends React.Component {
 								usr => usr !== this.props.userEmail
 							)[0]
 						}
+						{/*
+						<div className={classes.avatar}>
+							<ExampleComponent
+								image={this.props.chat.avatars.avatar1}
+								roundedColor="#321124"
+								imageWidth="150"
+								imageHeight="150"
+								roundedSize="13"
+							/>
+						</div>
+						*/}
 					</div>
 					<main id="chatview-container" className={classes.content}>
 						{this.props.chat.messages.map((msg, index) => {
@@ -98,7 +110,7 @@ class ChatViewComponent extends React.Component {
 											<div>
 												<Button 
 													href={msg.message}
-													target="_blank"
+													target="_blank" //open attachment in a new tab
 													variant="outlined" 
 													color="primary"
 													className={classes.button}

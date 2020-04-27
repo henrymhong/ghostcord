@@ -1,13 +1,12 @@
 const styles = theme => ({
 	content: {
-		height: "calc(100vh - 100px)",
+		height: "calc(100vh - 200px)",
 		overflow: "auto",
 		padding: "25px",
-
 		marginLeft: "300px",
 		boxSizing: "border-box",
 		overflowY: "scroll",
-		top: "50px",
+		top: "115px",
 		width: "calc(100% - 300px)",
 		position: "absolute"
 	},
@@ -78,6 +77,9 @@ const styles = theme => ({
 	iconButton: {
 		display: "flex",
 		flexDirection: "column"
+	},
+	avatar: {
+		position: "center"
 	}
 });
 

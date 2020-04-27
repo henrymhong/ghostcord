@@ -66,7 +66,7 @@ const styles = theme => ({
 		width: "calc(100% - 301px)",
 		height: "50px",
 		backgroundColor: "#344195",
-		position: "fixed",
+		position: "absolute",
 		marginLeft: "301px",
 		fontSize: "18px",
 		textAlign: "center",

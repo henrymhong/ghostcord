@@ -150,15 +150,36 @@ class LoginForm extends Component{
 		fire
 			.auth()
 			.signInWithPopup(this.provider)
-			.then(
-				() => {
-				this.props.history.push("/dashboard");
-				},
-				err => {
-					this.setState({ serverError: true });
-					console.log("Error logging in: ", err);
+			.then(res => {
+				const userObj = {
+					email: res.user.email,
+					name: res.user.displayName,
+					avatar: res.user.photoURL //get user's google profile picture
+				};
+				//check if this is a new user in database
+				const result = fire.firestore()
+						.collection("users")
+						.where("email", "==", res.user.email)
+						.get()
+				//if new user
+				//save user information acquired from Google to Firebase
+				if(result.value === null){
+					fire
+					.firestore()
+					.collection("users")
+					.doc(res.user.email)
+					.set(userObj)
+					.then(
+						() => {
+							this.props.history.push("/dashboard");
+						},
+						dbError => {
+							console.log(dbError);
+						}
+					);
 				}
-			);
+				this.props.history.push("/dashboard");
+			});
 	};
 
 	submitLogin = async e => {

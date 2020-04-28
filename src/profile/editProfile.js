@@ -149,12 +149,12 @@ class EditProfileComponent extends Component {
 
 	update = (e) => {
 		e.preventDefault();
-
-		// updating the user's name
-		fire.firestore().collection('users').doc(fire.auth().currentUser.email).update({
-			name: this.state.name
-		});
-
+		// updating the user's name if there is an input
+		if(this.state.name != ""){
+			fire.firestore().collection('users').doc(fire.auth().currentUser.email).update({
+				name: this.state.name
+			});
+		}
 		// updating the user's avatar
 		const { image } = this.state;
 		const uploadTask = db.ref(`images/${image.name}`).put(image);

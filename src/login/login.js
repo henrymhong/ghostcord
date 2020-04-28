@@ -150,20 +150,20 @@ class LoginForm extends Component{
 		fire
 			.auth()
 			.signInWithPopup(this.provider)
-			.then(res => {
+			.then(async res => {
 				const userObj = {
 					email: res.user.email,
 					name: res.user.displayName,
 					avatar: res.user.photoURL //get user's google profile picture
 				};
 				//check if this is a new user in database
-				const result = fire.firestore()
+				const result = await fire.firestore()
 						.collection("users")
 						.where("email", "==", res.user.email)
 						.get()
 				//if new user
 				//save user information acquired from Google to Firebase
-				if(result.value === null){
+				if(result.docs.length === 0){
 					fire
 					.firestore()
 					.collection("users")
@@ -178,7 +178,10 @@ class LoginForm extends Component{
 						}
 					);
 				}
-				this.props.history.push("/dashboard");
+				else{
+					this.props.history.push("/dashboard");
+				}
+				
 			});
 	};
 

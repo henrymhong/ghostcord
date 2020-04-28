@@ -1,6 +1,6 @@
 const styles = theme => ({
 	content: {
-		height: "calc(100vh - 200px)",
+		height: "calc(100vh - 180px)",
 		overflow: "auto",
 		padding: "25px",
 		marginLeft: "300px",

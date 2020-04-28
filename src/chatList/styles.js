@@ -1,8 +1,10 @@
 const styles = theme => ({
 	root: {
 		//backgroundColor: theme.palette.background.paper,
+		overflow: "auto",
+		overflowY: "scroll",
 		backgroundColor: "theme.palette.background.paper",
-		height: "calc(100% - 35px)",
+		height: "calc(100% - 68px)",
 		position: "absolute",
 		left: "0",
 		width: "300px",

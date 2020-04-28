@@ -15,7 +15,7 @@ const styles = theme => ({
 	},
 	chatTextBoxContainer: {
 		position: "absolute",
-		bottom: "15px",
+		bottom: "1px",
 		left: "315px",
 		boxSizing: "border-box",
 		overflow: "auto",

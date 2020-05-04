@@ -14,7 +14,7 @@ class Canvas extends Component {
   }
   isPainting = false;
 
-  userStrokeStyle = '#EE92C2';
+  userStrokeStyle = '#184a46';
   guestStrokeStyle = '#F0C987';
   line = [];
   // v4 creates a unique id for each user. We used this since there's no auth to tell users apart

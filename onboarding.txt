@@ -28,6 +28,8 @@ and start developing for GHOSTCORD
 DISCLAIMER: Please make sure to have node.js and npm installed on your device
             Also please have Chrome installed for development testing
 
-
+To Run whiteboard feature:
+1.  Change directory to root directory
+2.  node server
 
 ==Copyright of 4Asians==

@@ -40,4 +40,56 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+
+  <!-- <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+  <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+
+    <button id="btn-open-room">
+      Open
+    </button>
+    <button id="btn-join-room">
+      Join
+    </button>
+
+  <script>
+
+      if (/login/.test(window.location.href)) {
+        document.getElementById('btn-open-room').style.display = 'none';
+        document.getElementById('btn-join-room').style.display = 'none';
+      }
+      // Get URL
+      var url = window.location.href;
+      // Get DIV
+      var msg = document.getElementById('btn-open-room');
+      // Check if URL contains the keyword
+      if( url.search( 'success' ) > 0 ) {
+          // Display the message
+          msg.style.display = "block";
+      }
+
+      var connection = new RTCMultiConnection();
+
+      // this line is VERY_important
+      connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+
+      // if you want audio+video conferencing
+      connection.session = {
+          audio: true,
+          video: true
+      };
+
+      connection.sdpConstraints.mandatory = {
+        OfferToRecieveAudio: true,
+        OfferToRecieveVideo: true
+      };
+      document.getElementById('btn-open-room').onclick = function(){
+        this.disable = true;
+        connection.open('your-room-id');
+      };
+      document.getElementById('btn-join-room').onclick = function(){
+        this.disable = true;
+        connection.join('your-room-id');
+      };
+      
+  </script> -->
 </html>

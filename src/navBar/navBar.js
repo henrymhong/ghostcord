@@ -41,6 +41,9 @@ class navBar extends Component {
                 <Typography variant="h6" className={classes.title}>
                     <Link variant="h6" className={classes.title} to="/profile">Profile</Link>
                 </Typography>
+                <Typography variant="h6" className={classes.title}>
+                    <Link variant="h6" className={classes.title} to="/video">Video</Link>
+                </Typography>
                 <Button variant="h6" className={classes.title} onClick={this.signOut} >Logout</Button>
               </Toolbar>
             </AppBar>

@@ -14,6 +14,7 @@ import FriendsComponent from "./friends/friends";
 import AboutComponent from "./about/about";
 import VideoRoomComponent from "./videoroom/videoroom";
 import WhiteBoardComponent from "./whiteboard/whiteboard";
+import VideoComponent from "./videoroom/Video";
 
 const routing = (
 	<Router>
@@ -28,7 +29,7 @@ const routing = (
 			<Route path ="/profile/edit" component={EditProfileComponent}></Route>
 			<Route path="/whiteboard" component={WhiteBoardComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
-			<Route path="/videoroom" component={VideoRoomComponent}></Route>
+			<Route path="/video" component={VideoComponent}></Route>
 		</div>
 	</Router>
 );

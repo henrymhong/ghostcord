@@ -5,16 +5,13 @@ import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import HomePageComponent from "./homepage/homepage";
 import SignUpComponent from "./signup/SignUpForm"
-// import LoginComponent from "./login/login";
-// import SignupComponent from "./signup/signup";
 import DashboardComponent from "./dashboard/dashboard";
 import ProfileComponent from "./profile/profile";
 import EditProfileComponent from "./profile/editProfile";
 import FriendsComponent from "./friends/friends";
 import AboutComponent from "./about/about";
-import VideoRoomComponent from "./videoroom/videoroom";
 import WhiteBoardComponent from "./whiteboard/whiteboard";
-import VideoComponent from "./videoroom/Video";
+import VideoChatComponent from "./video/videochat";
 
 const routing = (
 	<Router>
@@ -29,7 +26,7 @@ const routing = (
 			<Route path ="/profile/edit" component={EditProfileComponent}></Route>
 			<Route path="/whiteboard" component={WhiteBoardComponent}></Route>
 			<Route path="/about" component={AboutComponent}></Route>
-			<Route path="/video" component={VideoComponent}></Route>
+			<Route path="/video" component={VideoChatComponent}></Route>
 		</div>
 	</Router>
 );

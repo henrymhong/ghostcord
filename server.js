@@ -1,14 +1,10 @@
-import 'rtcmulticonnection-server';
-
-require('dotenv').config();
+const config = require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
+const pino = require('express-pino-logger')();
+const { chatToken, videoToken, voiceToken } = require('./tokens');
+require('dotenv').config();
 const Pusher = require('pusher');
-
-var io = require('socket.io')
-({
-    path:'/webrtc'
-})
 
 const app = express();
 const port =  8080;
@@ -44,48 +40,65 @@ const pusher = new Pusher({
   });
   // end of whiteboard feature
 
-app.get('/', (req, res) => res.send('Hello World'))
-app.use(express.static('/Users/matthewszeto/ghostcord/build'))
+  //video server
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(pino);
 
-app.get('/', (req, res, next) => {
-    res.sendFile('/Users/matthewszeto/ghostcord/build/index.html')
-})
+const sendTokenResponse = (token, res) => {
+  res.set('Content-Type', 'application/json');
+  res.send(
+    JSON.stringify({
+      token: token.toJwt()
+    })
+  );
+};
 
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.get('/api/greeting', (req, res) => {
+  const name = req.query.name || 'World';
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+});
 
-io.listen(server);
+app.get('/chat/token', (req, res) => {
+  const identity = req.query.identity;
+  const token = chatToken(identity, config);
+  sendTokenResponse(token, res);
+});
 
-const peers = io.of('/webrtcPeer')
+app.post('/chat/token', (req, res) => {
+  const identity = req.body.identity;
+  const token = chatToken(identity, config);
+  sendTokenResponse(token, res);
+});
 
-let connectedPeers = new Map();
+app.get('/video/token', (req, res) => {
+  const identity = req.query.identity;
+  const room = req.query.room;
+  const token = videoToken(identity, room, config);
+  sendTokenResponse(token, res);
+});
 
-peers.on('connection', socket => {
-    console.log(socket.id);
-    socket.emit('connection-success', { success: socket.id });
+app.post('/video/token', (req, res) => {
+  const identity = req.body.identity;
+  const room = req.body.room;
+  const token = videoToken(identity, room, config);
+  sendTokenResponse(token, res);
+});
 
-    connectedPeers.set(socket.id, socket);
+app.get('/voice/token', (req, res) => {
+  const identity = req.body.identity;
+  const token = voiceToken(identity, config);
+  sendTokenResponse(token, res);
+});
 
-    socket.on('disconnect', () => {
-        console.log('disconnected');
-        connectedPeers.delete(socket.id);
-    });
+app.post('/voice/token', (req, res) => {
+  const identity = req.body.identity;
+  const token = voiceToken(identity, config);
+  sendTokenResponse(token, res);
+});
 
-    socket.on('offerOrAnswer', (data) => {
-        for (const [socketID, socket] of connectedPeers.entries()) {
-            if (socketID != data.socketID) {
-                console.log(socketID, data.payload.type);
-                socket.emit('offerOrAnswer', data.payload);
-            }
-        }
-    });
+app.listen(3001, () =>
+  console.log('Express server is running on localhost:3001')
+);
 
-    socket.on('candidate', (data) => {
-        for (const [socketID, socket] of connectedPeers.entries()) {
-            if (socketID != data.socketID) {
-                console.log(socketID, data.payload.type);
-                socket.emit('candidate', data.payload);
-            }
-        }
-    });
-
-})

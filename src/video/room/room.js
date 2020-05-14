@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video';
 import Participant from './../participant/participant';
+import NavBarComponent from "../../navBar/navBar";
 
 const Room = ({ roomName, token, handleLogout }) => {
     const [room, setRoom] = useState(null);
@@ -44,9 +45,11 @@ const Room = ({ roomName, token, handleLogout }) => {
       }, [roomName, token]);
 
       return (
+        
         <div className="room">
+          <NavBarComponent />
           <h2>Room: {roomName}</h2>
-          <button onClick={handleLogout}>Log out</button>
+          <button className="leave-room-btn" onClick={handleLogout}>Leave Room</button>
           <div className="local-participant">
             {room ? (
                         <Participant

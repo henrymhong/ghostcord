@@ -141,11 +141,14 @@ class SignUpForm extends Component {
     };
 
     submitSignup = (e) => {
+
+        this.setState({signupError: ""})
         e.preventDefault();
         if (!this.passwordsMatch()) {
             this.setState({ signupError: "Passwords do not match!" });
             return;
         }
+
 
         fire.auth()
             .createUserWithEmailAndPassword(
@@ -164,12 +167,12 @@ class SignUpForm extends Component {
                         .set(userObj)
                         .then(
                             () => {
-                                //this.props.history.push("/dashboard");
+                                this.props.history.push("/dashboard");
                             },
                             (dbError) => {
                                 console.log(dbError);
                                 this.setState({
-                                    signupError: "Failed to add user",
+                                    signupError: "Incorrect Information or Email already in use",
                                 });
                             }
                         );
@@ -177,7 +180,7 @@ class SignUpForm extends Component {
                 },
                 (authError) => {
                     console.log(authError);
-                    this.setState({ signupError: "Failed to add user" });
+                    this.setState({ signupError: authError.message });
                 }
             );
     };

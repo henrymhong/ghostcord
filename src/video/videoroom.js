@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styles from "./styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import io from 'socket.io-client';
+import NavBarComponent from "../navBar/navBar";
 
 class VideoRoomComponent extends Component {
     
@@ -117,6 +118,7 @@ class VideoRoomComponent extends Component {
 
         return (
             <div>
+                <NavBarComponent />
                 <video 
                     className={classes.video} 
                     ref={this.localVideoref} 

@@ -1,3 +1,6 @@
+import green from '@material-ui/core/colors/green';
+import { createMuiTheme } from '@material-ui/core/styles';
+
 const styles = theme => ({
     main: {
 		width: "auto",
@@ -24,7 +27,7 @@ const styles = theme => ({
 		marginTop: theme.spacing()
 	},
 	submit: {
-		marginTop: theme.spacing(3)
+		marginTop: theme.spacing(3),
     },
     large: {
         width: theme.spacing(10),

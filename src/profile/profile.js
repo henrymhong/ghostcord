@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Paper, Button } from '@material-ui/core';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import styles from './styles';
+import "./profile.css";
 import withStyles from "@material-ui/core/styles/withStyles";
 import NavBarComponent from "../navBar/navBar";
 
@@ -38,24 +39,13 @@ class ProfileComponent extends Component {
 						/>
 						<h1>{this.state.user.name}</h1>
 						<h2>{ this.state.user.email }</h2>
-						<Button
-							variant="contained" 
-							color="primary"
-							fullWidth 
-							onClick={ () => this.props.history.push("/dashboard") }
-							className={classes.submit}
-						>
-							Back
-						</Button>
-						<Button 
+						<button 
 							onClick={ () => this.props.history.push("/profile/edit") }
 							variant="contained" 
-							color="primary"
 							fullWidth
-							className={classes.submit}
 						>
 							Edit
-						</Button>
+						</button>
 					</Paper>
 				</main>
 			</div>

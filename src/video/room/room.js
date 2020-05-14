@@ -50,6 +50,7 @@ const Room = ({ roomName, token, handleLogout }) => {
           <NavBarComponent />
           <h2 className="room-name">{roomName}</h2>
           <button className="leave-room-btn" onClick={handleLogout}>Leave Room</button>
+          {/* <button className="mute-btn" onClick={handleMute}>Mute</button> */}
           <div className="local-participant">
             {room ? (
                         <Participant

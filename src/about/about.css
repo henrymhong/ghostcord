@@ -1,11 +1,55 @@
-.logo {
-    background-color: #184a46;
-    Display: flex;
-    Align-Items: center;
-    Justify-Content: center;
+.our_story {
+    max-width: 50%;
+    margin: auto;
+
 }
 
-.logo h1 {
-    color: white;
-    font-size: 100px;
+.our_story h1 {
+    color: #184a46;
+    font-size: 55px;
+    text-align: center;
 }
+
+.founders {
+    display: flex;
+    max-width: 50%;
+    margin: auto;
+}
+
+.founders h2 {
+    font-size: 35px;
+    color: #184a46;
+    display: inline;
+    margin: 20px;
+}
+
+.founders h4 {
+    font-size: 20px;
+}
+
+.col {
+    flex-direction: column;
+    margin: 10px;
+}
+
+.contact {
+    display: flex;
+    max-width: 50%;
+    margin: auto;
+}
+
+.contact h2 {
+    font-size: 35px;
+    color: #184a46;
+    margin: 20px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: black;
+}
+
+.contact span {
+    font-weight: bold;
+}
+

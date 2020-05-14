@@ -16,8 +16,10 @@ import VideoChatComponent from "./video/videochat";
 const routing = (
 	<Router>
 		<div id="routing-container">
-			<Redirect exact from="/" to="/login" />
+			<Redirect exact from="/" to="/login" /> 
 			<Route exact path="/" component={HomePageComponent}></Route>
+			{/* <Redirect exact from="/" to="/" />
+			<Route path="/" component={AboutComponent}></Route> */}
 			<Route path="/login" component={HomePageComponent}></Route>
 			<Route path="/signup" component={HomePageComponent}></Route>
 			<Route path="/dashboard" component={DashboardComponent}></Route>

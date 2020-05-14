@@ -4,8 +4,7 @@ const white = grey[50];
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-
+        // flexGrow: 1,
     },
     title: {
         padding: theme.spacing(2),

@@ -229,7 +229,7 @@ const HomeComponent = ({ history }) => {
                                 src={state.home.loadedAvatars[state.user.email]}
                             />
                         </StyledBadge>
-                        <Button
+                        {/* <Button
                             variant="outlined"
                             onClick={() => {
                                 auth.signOut();
@@ -237,7 +237,7 @@ const HomeComponent = ({ history }) => {
                             }}
                         >
                             Logout
-                        </Button>
+                        </Button> */}
                         <IconButton
                             onClick={() =>
                                 dispatch({

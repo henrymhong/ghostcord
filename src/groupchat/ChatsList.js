@@ -7,12 +7,13 @@ import {
     ListItemText,
 } from "@material-ui/core";
 
-const ChatsListComponent = ({ chatsList, selectFunction }) => {
+const ChatsListComponent = ({ chatsList, selectFunction, loadedAvatars }) => {
     if (chatsList.length > 0) {
         // If the user is in at least one chat
         return (
             <List>
-                {console.log(chatsList)}
+                {console.log("LOADEDAVATARS:", loadedAvatars)}
+
                 {chatsList.map((chat, index) => {
                     // create a list item for each chat by mapping over the chatsList passed in from props
                     return (
@@ -23,7 +24,10 @@ const ChatsListComponent = ({ chatsList, selectFunction }) => {
                                 divider
                             >
                                 <ListItemAvatar>
-                                    <Avatar alt="Remy Sharp" src={""}>
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={loadedAvatars[chat.owner]}
+                                    >
                                         {chat.name.split("")[0]}
                                     </Avatar>
                                 </ListItemAvatar>

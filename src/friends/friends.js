@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBarComponent from "../navBar/navBar";
+import { GlobalContext } from "../state/State";
 
 const FriendsComponent = ({ history }) => {
+    const { state, dispatch } = useContext(GlobalContext);
+
     return (
         <div>
             <NavBarComponent history={history} />

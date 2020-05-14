@@ -119,32 +119,66 @@ const HomeComponent = ({ history }) => {
         }
     };
 
-    const selectChat = async (chatIndex) => {
-        await dispatch({ type: "SET_SELECTED_CHAT", payload: chatIndex });
-        // updateAvatars();
-        console.log(state.home.selectedChat);
+    const selectChat = (chatIndex) => {
+        dispatch({ type: "SET_SELECTED_CHAT", payload: chatIndex });
     };
 
-    const updateAvatars = () => {
-        var i = 0;
+    useEffect(() => {
         console.log(state.home.selectedChat);
-        let chatUsers = state.home.chats[state.home.selectedChat].users;
+        updateAvatars();
+    }, [state.home.selectedChat]);
 
-        for (i; i < Object.keys(chatUsers).length; i++) {
-            let email = chatUsers[i];
-            if (!(email in state.home.loadedAvatars)) {
-                firestore
-                    .collection("users")
-                    .doc(email)
-                    .get()
-                    .then((res) => {
-                        let temp = state.home.loadedAvatars;
-                        temp[email] = res.data().avatar;
-                        dispatch({ type: "SET_AVATARS", payload: temp });
-                    });
+    const updateAvatars = () => {
+        if (!(state.home.selectedChat === null)) {
+            console.log("UPDATEAVATARS: ", state.home.chats);
+            if (
+                state.home.chats.length !== 0 &&
+                state.home.chats !== undefined
+            ) {
+                var i = 0;
+                console.log(state.home.chats);
+                console.log(state.home.selectedChat);
+                console.log(state.home.chats[state.home.selectedChat]);
+                let chatUsers = state.home.chats[state.home.selectedChat].users;
+
+                for (i; i < Object.keys(chatUsers).length; i++) {
+                    let email = chatUsers[i];
+                    if (!(email in state.home.loadedAvatars)) {
+                        firestore
+                            .collection("users")
+                            .doc(email)
+                            .get()
+                            .then((res) => {
+                                let temp = state.home.loadedAvatars;
+                                temp[email] = res.data().avatar;
+                                dispatch({
+                                    type: "SET_AVATARS",
+                                    payload: temp,
+                                });
+                            });
+                    }
+                }
             }
         }
     };
+
+    useEffect(() => {
+        if (state.user.email !== null) {
+            let temp;
+            firestore
+                .collection("users")
+                .doc(state.user.email)
+                .get()
+                .then((res) => {
+                    temp = state.home.loadedAvatars;
+                    temp[state.user.email] = res.data().avatar;
+                    dispatch({
+                        type: "SET_AVATARS",
+                        payload: temp,
+                    });
+                });
+        }
+    }, [state.user.email]);
 
     return (
         <>

@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import NavBarComponent from "../navBar/navBar";
 
-export default class FriendsComponent extends Component {
-    render() {
-        return (
-            <div>
-                <NavBarComponent history={this.props.history} />
-                <h1>Friends</h1>
-            </div>
-        );
-    }
-}
+const FriendsComponent = ({ history }) => {
+    return (
+        <div>
+            <NavBarComponent history={history} />
+            <h1>Friends</h1>
+        </div>
+    );
+};
+
+export default FriendsComponent;

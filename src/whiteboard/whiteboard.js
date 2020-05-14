@@ -11,14 +11,17 @@ class WhiteBoardComponent extends Component {
         return (
             <Fragment>
                 <NavBarComponent />
-                <h3 style={{ textAlign: 'center' }}>Welcome to the Whiteboard</h3>
-                <div className="main">
-                    <div className="color-guide">
-                        <h5>Color Guide</h5>
-                        <div className="user user">You</div>
-                        <div className="user guest">Guest</div>
+                <div>
+                    <h2 style={{ textAlign: 'center', color: '#184a46' }}>Welcome to the Whiteboard</h2>
+
+                    <div className="main">
+                        <div className="color-guide">
+                            <h5>Color Guide</h5>
+                            <div className="user user">You</div>
+                            <div className="user guest">Guest</div>
+                        </div>
+                        <Canvas />
                     </div>
-                    <Canvas />
                 </div>
             </Fragment>
         );

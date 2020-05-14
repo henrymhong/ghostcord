@@ -8,7 +8,7 @@ const styles = theme => ({
 
     board: {
         margin: "auto",
-        width: "60%",
+        width: "20%",
     },
 
     button: {

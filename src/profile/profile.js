@@ -24,32 +24,35 @@ class ProfileComponent extends Component {
 		const { classes } = this.props;
 
 		return (
-			<div>
-				<NavBarComponent />
-				<main className={classes.main}>
-					<CssBaseline />
-					<Paper className={classes.paper}>
-						<br/>
-						<Avatar 
-							src={this.state.user.avatar} 
-							width="150"
-							height="150" 
-							alt="profile pic"
-							className={classes.large}
-						/>
-						<h1>{this.state.user.name}</h1>
-						<h2>{ this.state.user.email }</h2>
-						<button 
-							onClick={ () => this.props.history.push("/profile/edit") }
-							variant="contained" 
-							fullWidth
-						>
-							Edit
-						</button>
-					</Paper>
-				</main>
-			</div>
-		);
+            <div>
+                <NavBarComponent history={this.props.history} />
+
+                <main className={classes.main}>
+                    <CssBaseline />
+                    <Paper className={classes.paper}>
+                        <br />
+                        <Avatar
+                            src={this.state.user.avatar}
+                            width="150"
+                            height="150"
+                            alt="profile pic"
+                            className={classes.large}
+                        />
+                        <h1>{this.state.user.name}</h1>
+                        <h2>{this.state.user.email}</h2>
+                        <button
+                            onClick={() =>
+                                this.props.history.push("/profile/edit")
+                            }
+                            variant="contained"
+                            fullWidth
+                        >
+                            Edit
+                        </button>
+                    </Paper>
+                </main>
+            </div>
+        );
 	}
 	
 	componentDidMount() {

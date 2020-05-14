@@ -44,25 +44,46 @@ const RoutingComponent = () => {
                 <Route
                     path="/dashboard"
                     render={({ history }) => (
-                        <HomeComponent history={history}></HomeComponent>
+                        <HomeComponent history={history} />
                     )}
                 ></Route>
-                <Route path="/friends" component={FriendsComponent}></Route>
+                <Route
+                    path="/friends"
+                    render={({ history }) => (
+                        <FriendsComponent history={history} />
+                    )}
+                ></Route>
                 <Route
                     exact
                     path="/profile"
-                    component={ProfileComponent}
+                    render={({ history }) => (
+                        <ProfileComponent history={history} />
+                    )}
                 ></Route>
                 <Route
                     path="/profile/edit"
-                    component={EditProfileComponent}
+                    render={({ history }) => (
+                        <EditProfileComponent history={history} />
+                    )}
                 ></Route>
                 <Route
                     path="/whiteboard"
-                    component={WhiteBoardComponent}
+                    render={({ history }) => (
+                        <WhiteBoardComponent history={history} />
+                    )}
                 ></Route>
-                <Route path="/about" component={AboutComponent}></Route>
-                <Route path="/video" component={VideoChatComponent}></Route>
+                <Route
+                    path="/about"
+                    render={({ history }) => (
+                        <AboutComponent history={history} />
+                    )}
+                ></Route>
+                <Route
+                    path="/video"
+                    render={({ history }) => (
+                        <VideoChatComponent history={history} />
+                    )}
+                ></Route>
             </div>
         </Router>
     );

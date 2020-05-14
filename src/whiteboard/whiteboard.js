@@ -1,18 +1,24 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from "react";
 import styles from "./styles";
-import './styles.css';
+import "./styles.css";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { Button } from '@material-ui/core';
-import Canvas from './canvas';
+import { Button } from "@material-ui/core";
+import Canvas from "./canvas";
 import NavBarComponent from "../navBar/navBar";
 
-class WhiteBoardComponent extends Component {    
+class WhiteBoardComponent extends Component {
     render() {
         return (
             <Fragment>
-                <NavBarComponent />
+                <NavBarComponent history={this.props.history} />
                 <div>
-                    <h2 style={{ padding: 20, textAlign: 'center', color: '#184a46' }}></h2>
+                    <h2
+                        style={{
+                            padding: 20,
+                            textAlign: "center",
+                            color: "#184a46",
+                        }}
+                    ></h2>
 
                     <div className="main">
                         <div className="color-guide">

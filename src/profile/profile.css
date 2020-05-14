@@ -1,0 +1,18 @@
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons button {
+    background-color: #184a46;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding: 15px 40px;
+    font-size: 1em;
+    font-weight: 500;
+    width: 100px;
+    margin: 10px;
+}

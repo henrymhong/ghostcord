@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import IconButton from '@material-ui/core/IconButton';
 import AttachmentIcon from '@material-ui/icons/Attachment';
 import Button from '@material-ui/core/Button';
-
+import fire from "../config/fire";
 
 class ChatViewComponent extends React.Component {
 	constructor(props){
@@ -12,6 +12,7 @@ class ChatViewComponent extends React.Component {
 		this.state = {
 			message: ''
 		}
+		this.name = ""
 	}
 	componentDidMount = () => {
 		const container = document.getElementById("chatview-container");
@@ -24,10 +25,14 @@ class ChatViewComponent extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-
+		
 		if (this.props.chat === undefined) {
 			return <main className={classes.content}></main>;
 		} else if (this.props.chat !== undefined) {
+			const e = this.props.chat.users.filter(
+				usr => usr !== this.props.userEmail
+			)[0]
+			this.name = e
 			return (
 				<div>
 					<div className={classes.chatHeader}>
@@ -41,11 +46,8 @@ class ChatViewComponent extends React.Component {
 									.split("")[0]
 							}
 						</Avatar> */}
-						{
-							this.props.chat.users.filter(
-								usr => usr !== this.props.userEmail
-							)[0]
-						}
+						
+						{this.name}
 						{/*
 						<div className={classes.avatar}>
 							<ExampleComponent

@@ -1,47 +1,62 @@
 .our_story {
     max-width: 50%;
     margin: auto;
-
+    padding-top: 15px;
 }
 
-.our_story h1 {
+.our_story h2 {
     color: #184a46;
     font-size: 55px;
     text-align: center;
+    margin: 15px;
 }
 
 .founders {
-    display: flex;
     max-width: 50%;
     margin: auto;
+    text-align: center;
+    padding-top: 10px;
 }
 
 .founders h2 {
-    font-size: 35px;
     color: #184a46;
-    display: inline;
-    margin: 20px;
+    font-size: 35px;
+    margin: 10px;
 }
 
-.founders h4 {
+.names {
+    display: flex;
+    justify-content: center;
+}
+
+.names h4 {
     font-size: 20px;
+    margin: 15px;
 }
 
 .col {
     flex-direction: column;
-    margin: 10px;
+    margin: 15px;
 }
 
 .contact {
-    display: flex;
     max-width: 50%;
     margin: auto;
 }
 
 .contact h2 {
-    font-size: 35px;
     color: #184a46;
-    margin: 20px;
+    font-size: 35px;
+    text-align: center;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+}
+
+.info p {
+    margin: 10px;
 }
 
 .contact a {

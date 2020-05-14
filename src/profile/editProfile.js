@@ -6,7 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import NavBarComponent from "../navBar/navBar";
 import styles from './styles';
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import "./profile.css";
 
 class EditProfileComponent extends Component {
 
@@ -60,25 +60,27 @@ class EditProfileComponent extends Component {
 								></Input>
 							</FormControl>	
 							<br/>
-							<Button 
-								variant="contained" 
-								color="primary" 
-								type="submit" 
-								fullWidth
-								onClick={this.update}
-								className={classes.submit}
-							>
-								Save
-							</Button>	
-							<Button 
-								variant="contained" 
-								color="secondary" 
-								fullWidth
-								onClick={() => this.props.history.push("/profile")}
-								className={classes.submit}
-							>
-								Cancel
-							</Button>
+							<div className="buttons">
+								<button 
+									variant="contained" 
+									color="primary" 
+									type="submit" 
+									fullWidth
+									onClick={this.update}
+									className={classes.submit}
+								>
+									Save
+								</button>	
+								<button 
+									variant="contained" 
+									color="secondary" 
+									fullWidth
+									onClick={() => this.props.history.push("/profile")}
+									className={classes.submit}
+								>
+									Cancel
+								</button>
+							</div>
 						</form>
 					</Paper>
 				</main>

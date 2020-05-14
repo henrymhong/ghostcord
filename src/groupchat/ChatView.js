@@ -132,7 +132,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                         chat.messages.map((msg, index) => {
                             // Map all messages
                             var bubbleColor =
-                                msg.sender !== email ? "#CCCCCC" : "#147efb"; // If user sent message, set color
+                                msg.sender !== email ? "#CCCCCC" : "#184a46"; // If user sent message, set color
                             var fontColor =
                                 msg.sender !== email ? "#000000" : "#FFFFFF"; // If user sent message, set color
                             return (

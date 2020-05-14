@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, IconButton, TextField } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import { firestore } from "../config/fire";
+import { firestore, db } from "../config/fire";
 import firebase from "firebase/app";
+import AttachmentIcon from '@material-ui/icons/Attachment';
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import Button from '@material-ui/core/Button';
 
-const sendMessage = (message, chat, email, username) => {
+const sendMessage = (message, chat, email, username,type,fileName) => {
     if (message.length > 0) {
         // only send if the message isn't empty
         firestore
@@ -17,6 +21,8 @@ const sendMessage = (message, chat, email, username) => {
                     senderUsername: username,
                     message: message,
                     timestamp: Date.now(),
+                    type: type,
+                    fileName: fileName
                 }),
             })
             .then(() => {});
@@ -25,16 +31,75 @@ const sendMessage = (message, chat, email, username) => {
     }
 };
 
+
 const ChatViewComponent = ({ chat, avatars, email, username }) => {
     const [message, setMessage] = useState("");
     // const [bubbleColors, setBubbleColors] = useState({});
-
+    const onChoosePhoto = event => {
+        if (event.target.files && event.target.files[0]) {
+            const image = event.target.files[0]
+            if (image) {
+                const uploadTask = db.ref(`images/${image.name}`).put(image);
+                console.log("updating picture");
+                uploadTask.on(
+                    "state_changed",
+                    snapshot => {},
+                    error => {
+                        console.log(error);
+                    },
+                    () => {
+                        db
+                            .ref("images")
+                            .child(image.name)
+                            .getDownloadURL()
+                            .then(url => {
+                                sendMessage(url, chat, email, username,2,image.name)
+                            });
+                    }
+                );
+        
+                alert("photo sent!");
+            }
+        } else {
+            
+        }
+    }
+    const onChooseAttachment = event => {
+        if (event.target.files && event.target.files[0]) {
+            const image = event.target.files[0]
+            if (image) {
+                const uploadTask = db.ref(`images/${image.name}`).put(image);
+                console.log("updating picture");
+                uploadTask.on(
+                    "state_changed",
+                    snapshot => {},
+                    error => {
+                        console.log(error);
+                    },
+                    () => {
+                        db
+                            .ref("images")
+                            .child(image.name)
+                            .getDownloadURL()
+                            .then(url => {
+                                sendMessage(url, chat, email, username,3,image.name)
+                            });
+                    }
+                );
+        
+                alert("attachment sent!");
+            }
+        } else {
+            
+        }
+    }
+    
     // scroll the the bottom of the chat view
     useEffect(() => {
         const container = document.getElementById("chatview-container");
         if (container) container.scrollTo(0, container.scrollHeight);
     }, [chat]);
-
+    
     if (chat === undefined) {
         return <>Welcome</>;
     } else {
@@ -104,7 +169,37 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                                     </div>
                                     {/* Timestamp and Sender */}
                                     <div>
-                                        {msg.message}
+                                        {/*regular message*/}
+                                        {msg.type === 1 &&
+											<div style={{ fontSize: "15px", width: '250px'}}>
+												{msg.message}
+											</div>
+										}
+                                        {/*image*/}
+                                        {msg.type === 2 &&
+											<div>
+												<img
+												style={{width: '100%', height: '300px'}}
+                                    			src={msg.message}
+                                    			alt= "cannot load image"
+                                				/>
+											</div>
+										}
+                                        {/*attachment*/}
+                                        {msg.type === 3 &&
+											<div>
+												<Button 
+													href={msg.message}
+													target="_blank" //open attachment in a new tab
+													variant="outlined" 
+													color="primary"
+													//className={classes.button}
+													startIcon={<AttachmentIcon />}
+												>
+													{msg.fileName}
+												</Button>
+											</div>
+										}
                                         <div
                                             style={{
                                                 fontSize: "14px",
@@ -132,18 +227,48 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                         width: "100%",
                     }}
                 >
+                    {/*Send photos */}
+                    <input
+                        accept="image/*"
+                        //className={classes.input}
+                        id="icon-button-photo"
+                        onChange={onChoosePhoto}
+                        type="file"
+                        style={{ display: 'none', }}
+                    />
+                    <label htmlFor="icon-button-photo">
+                        <IconButton color="primary" component="span">
+                            <PhotoCamera />
+                        </IconButton>
+                    </label>
+                   
+                  
+                    {/*Send attachment */}
+                    <input
+                        accept="media_type"
+                        //className={classes.input}
+                        id="icon-button-attachment"
+                        onChange={onChooseAttachment}
+                        type="file"
+                        style={{ display: 'none', }}
+                    />
+                    <label htmlFor="icon-button-attachment">
+                        <IconButton color="primary" component="span">
+                            <AttachmentIcon/>
+                        </IconButton>
+				    </label>
                     <TextField
                         id="messagebox"
                         style={{ flexGrow: 1 }}
                         onKeyUp={(e) =>
                             e.keyCode === 13 // If the user hits enter
-                                ? sendMessage(message, chat, email, username)
+                                ? sendMessage(message, chat, email, username,1,"")
                                 : setMessage(e.target.value)
                         }
                     />
                     <IconButton
                         onClick={() =>
-                            sendMessage(message, chat, email, username)
+                            sendMessage(message, chat, email, username,1,"")
                         }
                     >
                         <SendRoundedIcon />
@@ -153,5 +278,6 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
         );
     }
 };
+
 
 export default ChatViewComponent;

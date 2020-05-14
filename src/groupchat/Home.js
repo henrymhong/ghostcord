@@ -191,9 +191,8 @@ const HomeComponent = ({ history }) => {
                     height: "90vh",
                     width: "100%",
                     display: "flex",
-                    borderWidth: 1,
-                    borderStyle: "solid",
-                    borderColor: "green",
+                    // borderWidth: 1,
+                    // borderStyle: "solid",
                     // backgroundColor: this.props.theme.backgroundColor
                 }}
             >
@@ -202,19 +201,20 @@ const HomeComponent = ({ history }) => {
                     style={{
                         height: "100%",
                         width: "17%",
-                        borderWidth: 1,
-                        borderStyle: "solid",
-                        borderColor: "black",
+                        // borderWidth: 1,
+                        // borderStyle: "solid",
+                        // borderColor: "black",
                         alignSelf: "flexStart",
+                        backgroundColor: "#e0e0e0",
+                        color: "#424242"
                     }}
                 >
                     {/* Profile / Logout / Create chat */}
                     <div
                         style={{
                             height: "15%",
-                            borderWidth: 1,
-                            borderStyle: "solid",
-                            borderColor: "red",
+                            // borderWidth: 1,
+                            // borderStyle: "solid",
                         }}
                     >
                         <StyledBadge
@@ -231,7 +231,7 @@ const HomeComponent = ({ history }) => {
                                 src={state.home.loadedAvatars[state.user.email]}
                             />
                         </StyledBadge>
-                        <Button
+                        {/* <Button
                             variant="outlined"
                             onClick={() => {
                                 auth.signOut();
@@ -239,7 +239,7 @@ const HomeComponent = ({ history }) => {
                             }}
                         >
                             Logout
-                        </Button>
+                        </Button> */}
                         <IconButton
                             onClick={() =>
                                 dispatch({
@@ -316,9 +316,8 @@ const HomeComponent = ({ history }) => {
                         style={{
                             width: "100%",
                             height: "84.5%",
-                            borderWidth: 1,
-                            borderStyle: "solid",
-                            borderColor: "blue",
+                            // borderWidth: 1,
+                            // borderStyle: "solid",
                         }}
                     >
                         <ChatsListComponent

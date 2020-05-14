@@ -136,9 +136,7 @@ const HomeComponent = ({ history }) => {
                 state.home.chats !== undefined
             ) {
                 var i = 0;
-                console.log(state.home.chats);
-                console.log(state.home.selectedChat);
-                console.log(state.home.chats[state.home.selectedChat]);
+                // console.log(state.home.chats[state.home.selectedChat]);
                 let chatUsers = state.home.chats[state.home.selectedChat].users;
 
                 for (i; i < Object.keys(chatUsers).length; i++) {
@@ -324,6 +322,7 @@ const HomeComponent = ({ history }) => {
                         <ChatsListComponent
                             chatsList={state.home.chats}
                             selectFunction={selectChat}
+                            loadedAvatars={state.home.loadedAvatars}
                         />
                     </div>
                 </div>

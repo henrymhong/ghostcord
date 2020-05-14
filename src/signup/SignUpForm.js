@@ -133,7 +133,7 @@ class SignUpForm extends Component {
     if (!this.passwordsMatch()) {
       this.setState({ signupError: "Passwords do not match!" });
       return;
-	}
+	  }
 
     fire
       .auth()
@@ -151,7 +151,7 @@ class SignUpForm extends Component {
             .set(userObj)
             .then(
               () => {
-                //this.props.history.push("/dashboard");
+                this.props.history.push("/dashboard");
               },
               (dbError) => {
                 console.log(dbError);

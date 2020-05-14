@@ -43,7 +43,7 @@ const StyledBadge = withStyles((theme) => ({
     },
 }))(Badge);
 
-const HomeComponent = () => {
+const HomeComponent = ({ history }) => {
     // constructor() {
     //   super();
     //   this.state = {
@@ -60,16 +60,23 @@ const HomeComponent = () => {
     const { state, dispatch } = useContext(GlobalContext);
 
     useEffect(() => {
-        firestore
-            .collection("chats")
-            .where("users", "array-contains", state.user.email)
-            .onSnapshot((result) => {
-                // anytime there is an update in database, call this to update chat list
-                dispatch({
-                    type: "SET_CHATS",
-                    payload: result.docs.map((doc) => doc.data()),
-                });
+        if (state.user.email === null) {
+            dispatch({
+                type: "SET_CHATS",
+                payload: [],
             });
+        } else {
+            firestore
+                .collection("chats")
+                .where("users", "array-contains", state.user.email)
+                .onSnapshot((result) => {
+                    // anytime there is an update in database, call this to update chat list
+                    dispatch({
+                        type: "SET_CHATS",
+                        payload: result.docs.map((doc) => doc.data()),
+                    });
+                });
+        }
 
         // if (!(state.user.email in state.home.loadedAvatars)) {
         //   firestore
@@ -142,9 +149,10 @@ const HomeComponent = () => {
     return (
         <>
             <div>
-                <NavBarComponent />
+                <NavBarComponent history={history} />
             </div>
-            <div id="outer-container"
+            <div
+                id="outer-container"
                 style={{
                     height: "90vh",
                     width: "100%",
@@ -191,7 +199,10 @@ const HomeComponent = () => {
                         </StyledBadge>
                         <Button
                             variant="outlined"
-                            onClick={() => auth.signOut()}
+                            onClick={() => {
+                                auth.signOut();
+                                history.push("/login");
+                            }}
                         >
                             Logout
                         </Button>

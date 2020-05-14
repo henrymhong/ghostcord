@@ -41,7 +41,12 @@ const RoutingComponent = () => {
                 <Route exact path="/" component={HomePageComponent}></Route>
                 <Route path="/login" component={HomePageComponent}></Route>
                 <Route path="/signup" component={HomePageComponent}></Route>
-                <Route path="/dashboard" component={HomeComponent}></Route>
+                <Route
+                    path="/dashboard"
+                    render={({ history }) => (
+                        <HomeComponent history={history}></HomeComponent>
+                    )}
+                ></Route>
                 <Route path="/friends" component={FriendsComponent}></Route>
                 <Route
                     exact

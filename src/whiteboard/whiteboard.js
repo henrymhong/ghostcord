@@ -12,7 +12,7 @@ class WhiteBoardComponent extends Component {
             <Fragment>
                 <NavBarComponent />
                 <div>
-                    <h2 style={{ textAlign: 'center', color: '#184a46' }}>Welcome to the Whiteboard</h2>
+                    <h2 style={{ padding: 20, textAlign: 'center', color: '#184a46' }}></h2>
 
                     <div className="main">
                         <div className="color-guide">

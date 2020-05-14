@@ -24,6 +24,7 @@ body {
     border-radius: 4px;
     color: white;
     font-size: 13px;
+    text-align: center;
     font-weight: bold;
     background: #184a46;
     margin: 10px 0;
@@ -31,4 +32,5 @@ body {
   .guest {
     background: #F0C987;
     color: white;
+    text-align: center;
   }

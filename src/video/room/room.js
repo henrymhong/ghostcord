@@ -48,7 +48,7 @@ const Room = ({ roomName, token, handleLogout }) => {
         
         <div className="room">
           <NavBarComponent />
-          <h2>Room: {roomName}</h2>
+          <h2 className="room-name">{roomName}</h2>
           <button className="leave-room-btn" onClick={handleLogout}>Leave Room</button>
           <div className="local-participant">
             {room ? (

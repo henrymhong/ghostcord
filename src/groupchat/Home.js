@@ -12,6 +12,7 @@ import ChatsListComponent from "./ChatsList";
 import ChatViewComponent from "./ChatView";
 import { GlobalContext } from "../state/State";
 import NavBarComponent from "../navBar/navBar";
+import Burger from "../burger/burger";
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -143,7 +144,7 @@ const HomeComponent = () => {
             <div>
                 <NavBarComponent />
             </div>
-            <div
+            <div id="outer-container"
                 style={{
                     height: "90vh",
                     width: "100%",

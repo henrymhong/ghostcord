@@ -84,6 +84,13 @@
     margin-bottom: 1em;
   }
   
+  .room-name {
+      text-align: center;
+      font-weight: 300;
+      margin-top: 3em;
+      margin-bottom: 1em;
+  }
+  
   .local-participant {
     text-align: center;
     margin-bottom: 2em;

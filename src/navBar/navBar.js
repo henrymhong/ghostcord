@@ -12,6 +12,7 @@ import styles from './styles';
 import withStyles from "@material-ui/core/styles/withStyles";
 import fire from "../config/fire";
 import { Link, withRouter } from "react-router-dom";
+import Burger from '../burger/burger';
 //import { connect } from 'react-redux';
 
 
@@ -26,26 +27,29 @@ class navBar extends Component {
             <div className={classes.root}>
             <AppBar position="static" className={classes.color}>
               <Toolbar>
-                  <Link variant="h6" className={classes.title} to="/dashboard">
+                  <Link variant="h9" className={classes.title} to="/dashboard">
                     <img src={require('../logo/logo.png')} alt="Ghostcord" className={classes.logo} /> 
                   </Link>
-                <Typography variant="h6" className={classes.title}>
-                    <Link  variant="h6" className={classes.title} to="/whiteboard">Whiteboard</Link>
+                <Typography variant="h9" className={classes.title}>
+                    <Link variant="h9" className={classes.title} to="/video">Video</Link>
                 </Typography>
-                <Typography variant="h6" className={classes.title}> 
-                    <Link variant="h6" className={classes.title} to="/friends">Friends</Link>
+                <Typography variant="h9" className={classes.title}>
+                    <Link  variant="h9" className={classes.title} to="/whiteboard">Whiteboard</Link>
                 </Typography>
-                <Typography variant="h6" className={classes.title}> 
-                    <Link variant="h6" className={classes.title} to="/about">About</Link>
+                <Typography variant="h9" className={classes.title}> 
+                    <Link variant="h9" className={classes.title} to="/friends">Friends</Link>
                 </Typography>
-                <Typography variant="h6" className={classes.title}>
-                    <Link variant="h6" className={classes.title} to="/profile">Profile</Link>
+                
+                <Typography variant="h9" className={classes.title}>
+                    <Link variant="h9" className={classes.title} to="/profile">Profile</Link>
                 </Typography>
-                <Typography variant="h6" className={classes.title}>
-                    <Link variant="h6" className={classes.title} to="/video">Video</Link>
+                <Typography variant="h9" className={classes.title}> 
+                    <Link variant="h9" className={classes.title} to="/about">About</Link>
                 </Typography>
-                <Button variant="h6" className={classes.title} onClick={this.signOut} >Logout</Button>
+                <Button variant="h9" className={classes.title} onClick={this.signOut} >Logout</Button>
               </Toolbar>
+
+
             </AppBar>
           </div>
         )

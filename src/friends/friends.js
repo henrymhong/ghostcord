@@ -148,7 +148,7 @@ const FriendsComponent = ({ history }) => {
                         label="Search for users..."
                         value={search}
                     ></TextField>
-                    <List>
+                    <List style={{overflowY:"scroll"}}>
                         {searchedUsers.map((users, index) =>
                             users.email !== state.user.email ? (
                                 <>

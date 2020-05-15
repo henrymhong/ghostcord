@@ -247,7 +247,6 @@ const HomeComponent = ({ history }) => {
                             height: "15%",
                             // borderWidth: 1,
                             // borderStyle: "solid",
-                            paddingBottom: 200
                         }}
                     >
                         <StyledBadge

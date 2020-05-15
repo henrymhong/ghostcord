@@ -72,8 +72,8 @@ const FriendsComponent = ({ history }) => {
 
     const onTextChange = (e) => {
         setSearch(e.target.value);
-        console.log(search);
-        onType(search);
+        console.log(e.target.value);
+        onType(e.target.value);
     };
 
     const onType = (search) => {

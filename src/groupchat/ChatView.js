@@ -197,7 +197,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
 													href={msg.message}
 													target="_blank" //open attachment in a new tab
 													variant="outlined" 
-													color="primary"
+													color="secondary"
 													//className={classes.button}
 													startIcon={<AttachmentIcon />}
 												>

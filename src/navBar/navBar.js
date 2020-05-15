@@ -86,7 +86,7 @@
 //                         <Button
 //                             variant="h9"
 //                             className={classes.title}
-//                             onClick={this.signOut}
+                            // onClick={this.signOut}
 //                         >
 //                             Logout
 //                         </Button>
@@ -128,6 +128,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InfoIcon from '@material-ui/icons/Info';
 import { Link, withRouter } from "react-router-dom";
+import fire from "../config/fire";
 
 const drawerWidth = 240;
 
@@ -197,8 +198,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawerRight() {
-// class navBar extends Component {
-//     render(){
 
         const classes = useStyles();
         const theme = useTheme();
@@ -210,6 +209,11 @@ export default function PersistentDrawerRight() {
         
         const handleDrawerClose = () => {
             setOpen(false);
+        };
+
+        const signOut = () => {
+          fire.auth().signOut();
+          this.props.history.push("/login");
         };
 
   return (
@@ -343,7 +347,16 @@ export default function PersistentDrawerRight() {
                 <ListItemIcon>
                     <ExitToAppIcon />
                 </ListItemIcon>
-                <ListItemText>Logout</ListItemText>
+                <ListItemText>
+                  <Link 
+                   variant="h9"
+                   className={classes.link}
+                   >
+                    <span onClick={signOut}>
+                      Logout
+                    </span>
+                   </Link>
+                </ListItemText>
             </ListItem>
         </List>
       </Drawer>

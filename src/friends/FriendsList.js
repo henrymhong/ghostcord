@@ -104,7 +104,9 @@ const Requests = () => {
                         );
                     })
                 ) : (
-                    <div>Add some friends!</div>
+                    <div>
+                        <em>Add some friends!</em>
+                    </div>
                 )}
             </List>
         </div>

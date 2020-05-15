@@ -175,12 +175,6 @@ const FriendsComponent = ({ history }) => {
                                             >
                                                 <AddIcon />
                                             </IconButton>
-                                            <IconButton
-                                                edge="end"
-                                                aria-label="delete"
-                                            >
-                                                <DeleteIcon />
-                                            </IconButton>
                                         </ListItemSecondaryAction>
                                     </ListItem>
                                     <Divider />

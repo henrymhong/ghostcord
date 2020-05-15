@@ -23,70 +23,74 @@ const sendInvite = async (
     setInviteError,
     selectedFriend
 ) => {
-    if (selectedFriend === "") {
-        setInviteError(null);
+    if (selectedChat !== "") {
+        if (selectedFriend === "") {
+            setInviteError(null);
 
-        let inviteEmail = await firestore
-            .collection("users")
-            .where("name", "==", username)
-            .get()
-            .then((res) => {
-                if (res.docs[0] !== undefined) {
-                    return res.docs[0].id;
-                }
-                setInviteError("No user with that name exists!");
-            })
-            .catch((err) => {
-                console.log("[ChatInvite] Error ", err);
-                return;
-            });
-
-        if (inviteEmail !== undefined) {
-            await firestore
-                .collection("chats")
-                .doc(chats.find((e) => e.name === selectedChat).id)
-                .update({
-                    invited: firebase.firestore.FieldValue.arrayUnion(
-                        inviteEmail
-                    ),
+            let inviteEmail = await firestore
+                .collection("users")
+                .where("name", "==", username)
+                .get()
+                .then((res) => {
+                    if (res.docs[0] !== undefined) {
+                        return res.docs[0].id;
+                    }
+                    setInviteError("No user with that name exists!");
                 })
                 .catch((err) => {
                     console.log("[ChatInvite] Error ", err);
                     return;
                 });
-            setInviteError("Invite sent!");
+
+            if (inviteEmail !== undefined) {
+                await firestore
+                    .collection("chats")
+                    .doc(chats.find((e) => e.name === selectedChat).id)
+                    .update({
+                        invited: firebase.firestore.FieldValue.arrayUnion(
+                            inviteEmail
+                        ),
+                    })
+                    .catch((err) => {
+                        console.log("[ChatInvite] Error ", err);
+                        return;
+                    });
+                setInviteError("Invite sent!");
+            }
+        } else {
+            let inviteEmail = await firestore
+                .collection("users")
+                .where("name", "==", selectedFriend)
+                .get()
+                .then((res) => {
+                    if (res.docs[0] !== undefined) {
+                        return res.docs[0].id;
+                    }
+                    setInviteError("No user selected!");
+                })
+                .catch((err) => {
+                    console.log("[ChatInvite] Error ", err);
+                    return;
+                });
+
+            if (selectedFriend !== undefined) {
+                await firestore
+                    .collection("chats")
+                    .doc(chats.find((e) => e.name === selectedChat).id)
+                    .update({
+                        invited: firebase.firestore.FieldValue.arrayUnion(
+                            inviteEmail
+                        ),
+                    })
+                    .catch((err) => {
+                        console.log("[ChatInvite] Error ", err);
+                        return;
+                    });
+                setInviteError("Invite sent!");
+            }
         }
     } else {
-        let inviteEmail = await firestore
-            .collection("users")
-            .where("name", "==", selectedFriend)
-            .get()
-            .then((res) => {
-                if (res.docs[0] !== undefined) {
-                    return res.docs[0].id;
-                }
-                setInviteError("No user selected!");
-            })
-            .catch((err) => {
-                console.log("[ChatInvite] Error ", err);
-                return;
-            });
-
-        if (selectedFriend !== undefined) {
-            await firestore
-                .collection("chats")
-                .doc(chats.find((e) => e.name === selectedChat).id)
-                .update({
-                    invited: firebase.firestore.FieldValue.arrayUnion(
-                        inviteEmail
-                    ),
-                })
-                .catch((err) => {
-                    console.log("[ChatInvite] Error ", err);
-                    return;
-                });
-            setInviteError("Invite sent!");
-        }
+        setInviteError("Select a chat!");
     }
 };
 
@@ -186,7 +190,11 @@ export const ChatInvite = ({
                 </Button>
             </DialogActions>
             {inviteError ? (
-                <Typography component="h5" variant="h6">
+                <Typography
+                    component="h5"
+                    variant="h6"
+                    style={{ textAlign: "center" }}
+                >
                     {inviteError}
                 </Typography>
             ) : null}

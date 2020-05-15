@@ -127,8 +127,9 @@ const FriendsComponent = ({ history }) => {
             {console.log(searchedUsers)}
             <NavBarComponent style={{ position: "sticky" }} history={history} />
             <div style={{ height: "auto", width: "auto" }}>
-                <AppBar position="static">
-                    <Tabs
+            <AppBar position="static"style={{ background:"linear-gradient(0deg, rgba(137,161,143,1) 100%, rgba(253,187,45,1) 100%)"}}>                    <Tabs
+                        variant="fullWidth"
+                        TabIndicatorProps={{style: {backgroundColor:'#184A46'}}}
                         value={tab}
                         onChange={handleChange}
                         aria-label="simple tabs example"

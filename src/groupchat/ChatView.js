@@ -117,13 +117,15 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                 <div
                     id="chatview-container"
                     style={{
-                        height: "95%",
+                        height: "98%",
                         width: "99%",
                         overflowY: "scroll",
+                        overflowX: "hidden",
                         //borderWidth: 3,
                         //borderStyle: "outset",
                         //borderColor: "purple",
                         paddingLeft: "10px",
+                        
                     }}
                 >
                     {chat.messages.length === 0 ? (

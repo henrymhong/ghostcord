@@ -31,5 +31,12 @@ and start developing for GHOSTCORD
 ## Versions:
 
     1.0.1 : Video chat disabled and whiteboard feature only works on local networks
+    
+    
+Main Contributers:
+https://github.com/mattszeto
+https://github.com/henrymhong
+https://github.com/Dev-Steven
+https://github.com/dqnguyen1506
 
 ==Copyright of 4Asians==

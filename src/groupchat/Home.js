@@ -223,19 +223,13 @@ const HomeComponent = ({ history }) => {
                     width: "100%",
                     paddingTop:"65px",
                     display: "flex",
-                    // borderWidth: 1,
-                    // borderStyle: "solid",
-                    // backgroundColor: this.props.theme.backgroundColor
                 }}
             >
                 {/* Left Section (ChatList) */}
                 <div
                     style={{
                         height: "103.5%",
-                        width: "17%",
-                        // borderWidth: 1,
-                        // borderStyle: "solid",
-                        // borderColor: "black",
+                        width: "20%",
                         alignSelf: "flexStart",
                         background:
                             "linear-gradient(0deg, rgba(137,161,143,1) 100%, rgba(253,187,45,1) 100%)",
@@ -248,10 +242,12 @@ const HomeComponent = ({ history }) => {
                             height: "15%",
                             // borderWidth: 1,
                             // borderStyle: "solid",
+                            display: "flex",
+                            flexDirection: "row"
                         }}
                     >
                         <StyledBadge
-                            style={{ padding: 20, paddingBottom: 0 }}
+                            style={{ margin: 10, paddingBottom: 0 }}
                             overlap="circle"
                             anchorOrigin={{
                                 vertical: "bottom",
@@ -265,15 +261,7 @@ const HomeComponent = ({ history }) => {
                                 className={classes.large}
                             />
                         </StyledBadge>
-                        {/* <Button
-                            variant="outlined"
-                            onClick={() => {
-                                auth.signOut();
-                                history.push("/login");
-                            }}
-                        >
-                            Logout
-                        </Button> */}
+                        
                         <IconButton
                             onClick={() =>
                                 dispatch({

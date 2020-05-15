@@ -13,6 +13,24 @@ import ChatViewComponent from "./ChatView";
 import { GlobalContext } from "../state/State";
 import NavBarComponent from "../navBar/navBar";
 import Burger from "../burger/burger";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: "flex",
+        "& > *": {
+            margin: theme.spacing(1),
+        },
+    },
+    small: {
+        width: theme.spacing(3),
+        height: theme.spacing(3),
+    },
+    large: {
+        width: theme.spacing(13),
+        height: theme.spacing(13),
+    },
+}));
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -192,7 +210,7 @@ const HomeComponent = ({ history }) => {
                 });
         }
     }, [state.user.email]);
-
+    const classes = useStyles();
     return (
         <>
             <div>
@@ -212,13 +230,14 @@ const HomeComponent = ({ history }) => {
                 {/* Left Section (ChatList) */}
                 <div
                     style={{
-                        height: "100%",
+                        height: "103.5%",
                         width: "17%",
                         // borderWidth: 1,
                         // borderStyle: "solid",
                         // borderColor: "black",
                         alignSelf: "flexStart",
-                        backgroundColor: "#e0e0e0",
+                        background:
+                            "linear-gradient(0deg, rgba(137,161,143,1) 100%, rgba(253,187,45,1) 100%)",
                         color: "#424242",
                     }}
                 >
@@ -242,6 +261,7 @@ const HomeComponent = ({ history }) => {
                             <Avatar
                                 alt="Remy Sharp"
                                 src={state.home.loadedAvatars[state.user.email]}
+                                className={classes.large}
                             />
                         </StyledBadge>
                         {/* <Button
@@ -322,7 +342,6 @@ const HomeComponent = ({ history }) => {
                                 email={state.user.email}
                             />
                         ) : null}
-                        <Divider style={{ width: "90%" }} />
                     </div>
                     {/* Chatroom list (ChatList) */}
                     <div

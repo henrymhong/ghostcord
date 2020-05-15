@@ -108,22 +108,24 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                 style={{
                     height: "100%",
                     width: "83%",
-                    borderWidth: 1,
-                    borderStyle: "solid",
+                    //borderWidth: 1,
+                    //borderStyle: "solid",
                     alignSelf: "flexStart",
-                    borderColor: "pink",
+                   // borderColor: "pink",
                 }}
             >
                 <div
                     id="chatview-container"
                     style={{
-                        height: "95%",
+                        height: "98%",
                         width: "99%",
                         overflowY: "scroll",
-                        borderWidth: 1,
-                        borderStyle: "solid",
-                        borderColor: "purple",
+                        overflowX: "hidden",
+                        //borderWidth: 3,
+                        //borderStyle: "outset",
+                        //borderColor: "purple",
                         paddingLeft: "10px",
+                        
                     }}
                 >
                     {chat.messages.length === 0 ? (
@@ -131,8 +133,10 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                     ) : (
                         chat.messages.map((msg, index) => {
                             // Map all messages
+                            var position =
+                                msg.sender !== email ? "left" : "right";
                             var bubbleColor =
-                                msg.sender !== email ? "#CCCCCC" : "#147efb"; // If user sent message, set color
+                                msg.sender !== email ? "linear-gradient(0deg, rgba(198,210,201,1) 100%, rgba(253,187,45,1) 100%)" : "rgb(38,94,94)"; // If user sent message, set color
                             var fontColor =
                                 msg.sender !== email ? "#000000" : "#FFFFFF"; // If user sent message, set color
                             return (
@@ -140,13 +144,13 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                                 <div
                                     key={index}
                                     style={{
-                                        float: "left",
+                                        float: `${position}`,
                                         clear: "both",
                                         padding: "15px 10px 15px 10px",
                                         boxSizing: "border-box",
                                         wordWrap: "break-word",
                                         marginTop: "10px",
-                                        backgroundColor: `${bubbleColor}`,
+                                        background: `${bubbleColor}`,
                                         width: "300px",
                                         borderRadius: "10px",
                                         fontSize: "20px",

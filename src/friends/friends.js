@@ -126,7 +126,6 @@ const FriendsComponent = ({ history }) => {
         <div>
             {console.log(searchedUsers)}
             <NavBarComponent style={{ position: "sticky" }} history={history} />
-            <div style={{ paddingTop: "3%", position: "static" }}></div>
             <div style={{ height: "auto", width: "auto" }}>
                 <AppBar position="static">
                     <Tabs

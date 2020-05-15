@@ -40,7 +40,9 @@ const ChatsListComponent = ({ chatsList, selectFunction, loadedAvatars }) => {
         );
     } else {
         // If the user is not in any chats
-        return <div>You have no chatrooms!</div>;
+        return (
+            <div style={{ textAlign: "center" }}>You have no chatrooms!</div>
+        );
     }
 };
 

@@ -10,31 +10,41 @@ import Button from '@material-ui/core/Button';
 import { teal } from '@material-ui/core/colors';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
-const sendMessage = (message, chat, email, username,type,fileName) => {
-    if (message.length > 0) {
-        // only send if the message isn't empty
-        firestore
-            .collection("chats")
-            .doc(chat.id)
-            .update({
-                // update the chat by adding a message object to the messages array in firestore
-                messages: firebase.firestore.FieldValue.arrayUnion({
-                    sender: email,
-                    senderUsername: username,
-                    message: message,
-                    timestamp: Date.now(),
-                    type: type,
-                    fileName: fileName
-                }),
-            })
-            .then(() => {});
-        // clear the chat input
-        document.getElementById("messagebox").value = "";
-    }
-};
+
 
 
 const ChatViewComponent = ({ chat, avatars, email, username }) => {
+    const [userN, setUserN] = useState("");
+    const sendMessage = (message, chat, email, username,type,fileName) => {
+        if (message.length > 0) {
+        
+            firestore
+            .collection("users")
+            .doc(email)
+            .get()
+            .then(res => {
+                firestore
+                .collection("chats")
+                .doc(chat.id)
+                .update({
+                    // update the chat by adding a message object to the messages array in firestore
+                    messages: firebase.firestore.FieldValue.arrayUnion({
+                        sender: email,
+                        senderUsername: res.data().name,
+                        message: message,
+                        timestamp: Date.now(),
+                        type: type,
+                        fileName: fileName
+                    }),
+                })
+                .then(() => {});
+            // clear the chat input
+            document.getElementById("messagebox").value = "";
+            });
+            // only send if the message isn't empty
+            
+        }
+    };
     const [message, setMessage] = useState("");
     // const [bubbleColors, setBubbleColors] = useState({});
     const onChoosePhoto = event => {

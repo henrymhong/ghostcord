@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(3),
     },
     large: {
-        width: theme.spacing(13),
-        height: theme.spacing(13),
+        width: theme.spacing(10),
+        height: theme.spacing(10),
     },
 }));
 
@@ -220,22 +220,17 @@ const HomeComponent = ({ history }) => {
             <div
                 id="outer-container"
                 style={{
-                    height: "90vh",
+                    height: "96.5vh",
                     width: "100%",
+                    paddingTop:"65px",
                     display: "flex",
-                    // borderWidth: 1,
-                    // borderStyle: "solid",
-                    // backgroundColor: this.props.theme.backgroundColor
                 }}
             >
                 {/* Left Section (ChatList) */}
                 <div
                     style={{
                         height: "103.5%",
-                        width: "17%",
-                        // borderWidth: 1,
-                        // borderStyle: "solid",
-                        // borderColor: "black",
+                        width: "20%",
                         alignSelf: "flexStart",
                         background:
                             "linear-gradient(0deg, rgba(137,161,143,1) 100%, rgba(253,187,45,1) 100%)",
@@ -248,10 +243,12 @@ const HomeComponent = ({ history }) => {
                             height: "15%",
                             // borderWidth: 1,
                             // borderStyle: "solid",
+                            display: "flex",
+                            flexDirection: "row"
                         }}
                     >
                         <StyledBadge
-                            style={{ paddingTop: 8 }}
+                            style={{ margin: 10, paddingBottom: 0 }}
                             overlap="circle"
                             anchorOrigin={{
                                 vertical: "bottom",
@@ -265,15 +262,7 @@ const HomeComponent = ({ history }) => {
                                 className={classes.large}
                             />
                         </StyledBadge>
-                        {/* <Button
-                            variant="outlined"
-                            onClick={() => {
-                                auth.signOut();
-                                history.push("/login");
-                            }}
-                        >
-                            Logout
-                        </Button> */}
+                        
                         <IconButton
                             onClick={() =>
                                 dispatch({
@@ -349,6 +338,7 @@ const HomeComponent = ({ history }) => {
                         style={{
                             width: "100%",
                             height: "84.5%",
+                            paddingTop: "100px"
                             // borderWidth: 1,
                             // borderStyle: "solid",
                         }}

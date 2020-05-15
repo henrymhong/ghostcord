@@ -26,7 +26,9 @@ class ProfileComponent extends Component {
 		return (
             <div>
                 <NavBarComponent history={this.props.history} />
-
+				<div style = {{paddingTop: "10%"}}>
+					
+				</div>
                 <main className={classes.main}>
                     <CssBaseline />
                     <Paper className={classes.paper}>

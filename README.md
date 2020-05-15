@@ -34,9 +34,9 @@ and start developing for GHOSTCORD
     
     
 Main Contributers:
-https://github.com/mattszeto
-https://github.com/henrymhong
-https://github.com/Dev-Steven
-https://github.com/dqnguyen1506
+- https://github.com/mattszeto
+- https://github.com/henrymhong
+- https://github.com/Dev-Steven
+- https://github.com/dqnguyen1506
 
 ==Copyright of 4Asians==

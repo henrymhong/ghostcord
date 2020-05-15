@@ -108,10 +108,10 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                 style={{
                     height: "100%",
                     width: "83%",
-                    borderWidth: 1,
-                    borderStyle: "solid",
+                    //borderWidth: 1,
+                    //borderStyle: "solid",
                     alignSelf: "flexStart",
-                    borderColor: "pink",
+                   // borderColor: "pink",
                 }}
             >
                 <div
@@ -120,9 +120,9 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                         height: "95%",
                         width: "99%",
                         overflowY: "scroll",
-                        borderWidth: 1,
-                        borderStyle: "solid",
-                        borderColor: "purple",
+                        //borderWidth: 3,
+                        //borderStyle: "outset",
+                        //borderColor: "purple",
                         paddingLeft: "10px",
                     }}
                 >
@@ -131,6 +131,8 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                     ) : (
                         chat.messages.map((msg, index) => {
                             // Map all messages
+                            var position =
+                                msg.sender !== email ? "left" : "right";
                             var bubbleColor =
                                 msg.sender !== email ? "#CCCCCC" : "#184a46"; // If user sent message, set color
                             var fontColor =
@@ -140,7 +142,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                                 <div
                                     key={index}
                                     style={{
-                                        float: "left",
+                                        float: `${position}`,
                                         clear: "both",
                                         padding: "15px 10px 15px 10px",
                                         boxSizing: "border-box",

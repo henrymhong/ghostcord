@@ -7,6 +7,7 @@ import AttachmentIcon from '@material-ui/icons/Attachment';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Button from '@material-ui/core/Button';
+import { teal } from '@material-ui/core/colors';
 
 const sendMessage = (message, chat, email, username,type,fileName) => {
     if (message.length > 0) {
@@ -242,7 +243,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                     />
                     <label htmlFor="icon-button-photo">
                         <IconButton color="primary" component="span">
-                            <PhotoCamera />
+                            <PhotoCamera style={{ color: teal[900] }} />
                         </IconButton>
                     </label>
                    
@@ -258,7 +259,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                     />
                     <label htmlFor="icon-button-attachment">
                         <IconButton color="primary" component="span">
-                            <AttachmentIcon/>
+                            <AttachmentIcon style={{ color: teal[900] }}/>
                         </IconButton>
 				    </label>
                     <TextField
@@ -275,7 +276,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                             sendMessage(message, chat, email, username,1,"")
                         }
                     >
-                        <SendRoundedIcon />
+                        <SendRoundedIcon style={{ color: teal[900] }} />
                     </IconButton>
                 </div>
             </main>

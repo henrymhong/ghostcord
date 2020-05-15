@@ -102,7 +102,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
     }, [chat]);
     
     if (chat === undefined) {
-        return <>Welcome</>;
+        return <></>;
     } else {
         return (
             <main

@@ -8,6 +8,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Button from '@material-ui/core/Button';
 import { teal } from '@material-ui/core/colors';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const sendMessage = (message, chat, email, username,type,fileName) => {
     if (message.length > 0) {
@@ -94,7 +95,23 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
             
         }
     }
-    
+const color = teal[900];
+const theme = createMuiTheme({
+  palette: {
+    common: { black: color, white: color },
+    primary: { main: color, dark: color, light: color },
+    text: { primary: color, secondary: color }
+  },
+  overrides: {
+    MuiInput: {
+      underline: {
+        "&:before": {
+          borderBottom: `1px solid ${color}`
+        }
+      }
+    }
+  }
+});
     // scroll the the bottom of the chat view
     useEffect(() => {
         const container = document.getElementById("chatview-container");
@@ -262,6 +279,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                             <AttachmentIcon style={{ color: teal[900] }}/>
                         </IconButton>
 				    </label>
+                    <MuiThemeProvider theme={theme}>
                     <TextField
                         id="messagebox"
                         style={{ flexGrow: 1 }}
@@ -271,6 +289,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                                 : setMessage(e.target.value)
                         }
                     />
+                    </MuiThemeProvider>
                     <IconButton
                         onClick={() =>
                             sendMessage(message, chat, email, username,1,"")

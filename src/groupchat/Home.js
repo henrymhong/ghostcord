@@ -222,7 +222,7 @@ const HomeComponent = ({ history }) => {
                         // borderColor: "black",
                         alignSelf: "flexStart",
                         background: "linear-gradient(0deg, rgba(137,161,143,1) 100%, rgba(253,187,45,1) 100%)",
-                        color: "#424242"
+                        color: "#424242",
                     }}
                 >
                     {/* Profile / Logout / Create chat */}

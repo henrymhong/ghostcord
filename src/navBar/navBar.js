@@ -104,7 +104,7 @@
 // // export default withRouter(connect()(withStyles(styles)(navBar)));
 // export default withStyles(styles)(navBar);
 
-import React from 'react';
+import React, { Component } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -197,17 +197,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawerRight() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+// class navBar extends Component {
+//     render(){
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+        const classes = useStyles();
+        const theme = useTheme();
+        const [open, setOpen] = React.useState(false);
+        
+        const handleDrawerOpen = () => {
+            setOpen(true);
+        };
+        
+        const handleDrawerClose = () => {
+            setOpen(false);
+        };
 
   return (
     <div className={classes.root}>
@@ -347,3 +350,5 @@ export default function PersistentDrawerRight() {
     </div>
   );
 }
+// }
+// export default navBar;

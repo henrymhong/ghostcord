@@ -247,10 +247,11 @@ const HomeComponent = ({ history }) => {
                             height: "15%",
                             // borderWidth: 1,
                             // borderStyle: "solid",
+                            paddingBottom: 200
                         }}
                     >
                         <StyledBadge
-                            style={{ paddingTop: 8 }}
+                            style={{ padding: 20, paddingBottom: 0 }}
                             overlap="circle"
                             anchorOrigin={{
                                 vertical: "bottom",

@@ -43,7 +43,6 @@ function TabPanel(props) {
                 )}
             </div>
         </div>
-        
     );
 }
 
@@ -126,10 +125,8 @@ const FriendsComponent = ({ history }) => {
     return (
         <div>
             {console.log(searchedUsers)}
-            <NavBarComponent style={{position: "sticky"}} history={history} />
-            <div style = {{paddingTop: "3%",position:"static"}}>
-					
-				</div>
+            <NavBarComponent style={{ position: "sticky" }} history={history} />
+            <div style={{ paddingTop: "3%", position: "static" }}></div>
             <div style={{ height: "auto", width: "auto" }}>
                 <AppBar position="static">
                     <Tabs
@@ -152,8 +149,8 @@ const FriendsComponent = ({ history }) => {
                         value={search}
                     ></TextField>
                     <List>
-                        {searchedUsers.map((users, index) => {
-                            return (
+                        {searchedUsers.map((users, index) =>
+                            users.email !== state.user.email ? (
                                 <>
                                     <ListItem key={index}>
                                         <ListItemAvatar>
@@ -189,8 +186,8 @@ const FriendsComponent = ({ history }) => {
                                     </ListItem>
                                     <Divider />
                                 </>
-                            );
-                        })}
+                            ) : null
+                        )}
                     </List>
                 </TabPanel>
                 <TabPanel value={tab} index={1}>

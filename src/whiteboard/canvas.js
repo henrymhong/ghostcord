@@ -104,8 +104,6 @@ class Canvas extends Component {
         ref={(ref) => (this.canvas = ref)}
         style={{ 
           background: 'black',
-          width: 750,
-          height: 500
         }}
         onMouseDown={this.onMouseDown}
         onMouseLeave={this.endPaintEvent}

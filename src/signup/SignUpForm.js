@@ -141,14 +141,12 @@ class SignUpForm extends Component {
     };
 
     submitSignup = (e) => {
-
-        this.setState({signupError: ""})
+        this.setState({ signupError: "" });
         e.preventDefault();
         if (!this.passwordsMatch()) {
             this.setState({ signupError: "Passwords do not match!" });
             return;
         }
-
 
         fire.auth()
             .createUserWithEmailAndPassword(
@@ -160,6 +158,9 @@ class SignUpForm extends Component {
                     const userObj = {
                         email: res.user.email,
                         name: this.state.name,
+                        friends: [],
+                        sent: [],
+                        received: [],
                     };
                     fire.firestore()
                         .collection("users")
@@ -172,7 +173,8 @@ class SignUpForm extends Component {
                             (dbError) => {
                                 console.log(dbError);
                                 this.setState({
-                                    signupError: "Incorrect Information or Email already in use",
+                                    signupError:
+                                        "Incorrect Information or Email already in use",
                                 });
                             }
                         );

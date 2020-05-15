@@ -76,6 +76,21 @@ const HomeComponent = ({ history }) => {
                         payload: result.docs.map((doc) => doc.data()),
                     });
                 });
+            firestore
+                .collection("users")
+                .get()
+                .then((res) => {
+                    let temp = state.home.loadedAvatars;
+
+                    temp = res.docs.map((doc) => {
+                        temp[doc.data().email] = doc.data().avatar;
+                    });
+                    // temp[email] = res.data().avatar;
+                    dispatch({
+                        type: "SET_AVATARS",
+                        payload: temp,
+                    });
+                });
         }
 
         // if (!(state.user.email in state.home.loadedAvatars)) {
@@ -204,7 +219,7 @@ const HomeComponent = ({ history }) => {
                         // borderColor: "black",
                         alignSelf: "flexStart",
                         backgroundColor: "#e0e0e0",
-                        color: "#424242"
+                        color: "#424242",
                     }}
                 >
                     {/* Profile / Logout / Create chat */}

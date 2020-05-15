@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import NavBarComponent from "../navBar/navBar";
+import Divider from "@material-ui/core/Divider";
+
 import {
     Tabs,
     AppBar,
@@ -18,7 +20,10 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import { GlobalContext } from "../state/State";
-import { firestore } from "../config/fire";
+import { auth, firestore } from "../config/fire";
+import firebase from "firebase/app";
+import Requests from "./Requests";
+import FriendsList from "./FriendsList";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -89,6 +94,33 @@ const FriendsComponent = ({ history }) => {
         );
     };
 
+    const sendRequest = (email, name) => {
+        // console.log("TARGET EMAIL: ", email);
+        // console.log("TARGET EMAIL: ", email);
+        // console.log("USER EMAIL: ", state.user.email);
+        // console.log("USER NAME: ", state.user.name);
+        firestore
+            .collection("users")
+            .doc(state.user.email)
+            .update({
+                sent: firebase.firestore.FieldValue.arrayUnion({
+                    email: email,
+                    name: name,
+                }),
+            })
+            .then(() => {});
+        firestore
+            .collection("users")
+            .doc(email)
+            .update({
+                received: firebase.firestore.FieldValue.arrayUnion({
+                    email: state.user.email,
+                    name: auth.currentUser.displayName,
+                }),
+            })
+            .then(() => {});
+    };
+
     return (
         <div>
             {console.log(searchedUsers)}
@@ -102,6 +134,7 @@ const FriendsComponent = ({ history }) => {
                     >
                         <Tab label="Users" />
                         <Tab label="Friends" />
+                        <Tab label="Requests" />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={tab} index={0}>
@@ -116,39 +149,50 @@ const FriendsComponent = ({ history }) => {
                     <List>
                         {searchedUsers.map((users, index) => {
                             return (
-                                <ListItem key={index}>
-                                    <ListItemAvatar>
-                                        <Avatar
-                                            src={
-                                                state.home.loadedAvatars[
-                                                    users.email
-                                                ]
-                                            }
-                                        ></Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary={users.name} />
-                                    <ListItemSecondaryAction>
-                                        <IconButton
-                                            edge="end"
-                                            aria-label="delete"
-                                            // onClick={}
-                                        >
-                                            <AddIcon />
-                                        </IconButton>
-                                        <IconButton
-                                            edge="end"
-                                            aria-label="delete"
-                                        >
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </ListItemSecondaryAction>
-                                </ListItem>
+                                <>
+                                    <ListItem key={index}>
+                                        <ListItemAvatar>
+                                            <Avatar
+                                                src={
+                                                    state.home.loadedAvatars[
+                                                        users.email
+                                                    ]
+                                                }
+                                            ></Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary={users.name} />
+                                        <ListItemSecondaryAction>
+                                            <IconButton
+                                                edge="end"
+                                                aria-label="delete"
+                                                onClick={() =>
+                                                    sendRequest(
+                                                        users.email,
+                                                        users.name
+                                                    )
+                                                }
+                                            >
+                                                <AddIcon />
+                                            </IconButton>
+                                            <IconButton
+                                                edge="end"
+                                                aria-label="delete"
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </ListItemSecondaryAction>
+                                    </ListItem>
+                                    <Divider />
+                                </>
                             );
                         })}
                     </List>
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    Item Two
+                    <FriendsList />
+                </TabPanel>
+                <TabPanel value={tab} index={2}>
+                    <Requests />
                 </TabPanel>
             </div>
         </div>

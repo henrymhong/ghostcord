@@ -213,6 +213,7 @@ const HomeComponent = ({ history }) => {
     const classes = useStyles();
     return (
         <>
+            {console.log("STATEUSERNAME: ", state.user.name)}
             <div>
                 <NavBarComponent history={history} />
             </div>

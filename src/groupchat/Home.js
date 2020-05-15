@@ -219,8 +219,9 @@ const HomeComponent = ({ history }) => {
             <div
                 id="outer-container"
                 style={{
-                    height: "90vh",
+                    height: "96.5vh",
                     width: "100%",
+                    paddingTop:"65px",
                     display: "flex",
                     // borderWidth: 1,
                     // borderStyle: "solid",
@@ -348,6 +349,7 @@ const HomeComponent = ({ history }) => {
                         style={{
                             width: "100%",
                             height: "84.5%",
+                            paddingTop: "100px"
                             // borderWidth: 1,
                             // borderStyle: "solid",
                         }}

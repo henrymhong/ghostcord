@@ -22,21 +22,23 @@ import { firestore } from "../config/fire";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
+        <div>
+            <div
+                role="tabpanel"
+                hidden={value !== index}
+                id={`simple-tabpanel-${index}`}
+                aria-labelledby={`simple-tab-${index}`}
+                {...other}
+            >
+                {value === index && (
+                    <Box p={3}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
         </div>
+        
     );
 }
 
@@ -92,7 +94,10 @@ const FriendsComponent = ({ history }) => {
     return (
         <div>
             {console.log(searchedUsers)}
-            <NavBarComponent history={history} />
+            <NavBarComponent style={{position: "sticky"}} history={history} />
+            <div style = {{paddingTop: "3%",position:"static"}}>
+					
+				</div>
             <div style={{ height: "auto", width: "auto" }}>
                 <AppBar position="static">
                     <Tabs

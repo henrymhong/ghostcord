@@ -1,6 +1,7 @@
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        position: "static"
     },
     menuButton: {
         marginRight: theme.spacing(2),

@@ -10,6 +10,9 @@ class WhiteBoardComponent extends Component {
     render() {
         return (
             <Fragment>
+                <div style = {{paddingTop: "10%"}}>
+					
+                    </div>
                 <NavBarComponent history={this.props.history} />
                 <div>
                     <h2

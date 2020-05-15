@@ -32,6 +32,9 @@ class EditProfileComponent extends Component {
         return (
 			<div>
 				<NavBarComponent />
+				<div style = {{paddingTop: "10%"}}>
+					
+				</div>
 				<main className={classes.main}>
 					<CssBaseline />
 					<Paper className={classes.paper}>

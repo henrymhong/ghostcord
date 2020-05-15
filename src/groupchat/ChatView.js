@@ -136,7 +136,7 @@ const ChatViewComponent = ({ chat, avatars, email, username }) => {
                             var position =
                                 msg.sender !== email ? "left" : "right";
                             var bubbleColor =
-                                msg.sender !== email ? "linear-gradient(0deg, rgba(198,210,201,1) 100%, rgba(253,187,45,1) 100%)" : "rgb(38,94,94)"; // If user sent message, set color
+                                msg.sender !== email ? "linear-gradient(0deg, rgba(198,210,201,1) 100%, rgba(253,187,45,1) 100%)" : "rgb(29,84,84)"; // If user sent message, set color
                             var fontColor =
                                 msg.sender !== email ? "#000000" : "#FFFFFF"; // If user sent message, set color
                             return (

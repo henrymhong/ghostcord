@@ -48,6 +48,32 @@ const acceptInvite = async (chat, email, setAcceptError) => {
     //       });
     //     setInviteError("Invite sent!");
     //   }
+    setAcceptError("");
+};
+
+const declineInvite = async (chat, email, setAcceptError) => {
+    setAcceptError(null);
+    await firestore
+        .collection("chats")
+        .doc(chat.id)
+        .update({ invited: firebase.firestore.FieldValue.arrayRemove(email) })
+        .catch((err) => {
+            console.log("[ChatAccept] ", err);
+            setAcceptError(err);
+        });
+    //   if (inviteEmail !== undefined) {
+    //     await firestore
+    //       .collection("chats")
+    //       .doc(chats.find(e => e.name === selectedChat).id)
+    //       .update({
+    //         invited: firebase.firestore.FieldValue.arrayUnion(inviteEmail)
+    //       })
+    //       .catch(err => {
+    //         console.log("[ChatInvite] Error ", err);
+    //         return;
+    //       });
+    //     setInviteError("Invite sent!");
+    //   }
 };
 
 export const ChatAccept = ({ showChatAccept, closeChatAccept, email }) => {
@@ -100,7 +126,17 @@ export const ChatAccept = ({ showChatAccept, closeChatAccept, email }) => {
                                 >
                                     <DoneIcon />
                                 </IconButton>
-                                <IconButton edge="end" aria-label="delete">
+                                <IconButton
+                                    edge="end"
+                                    aria-label="delete"
+                                    onClick={() =>
+                                        declineInvite(
+                                            chat,
+                                            email,
+                                            setAcceptError
+                                        )
+                                    }
+                                >
                                     <DeleteIcon />
                                 </IconButton>
                             </ListItemSecondaryAction>
@@ -109,7 +145,11 @@ export const ChatAccept = ({ showChatAccept, closeChatAccept, email }) => {
                 })}
             </List>
             {acceptError ? (
-                <Typography component="h5" variant="h6">
+                <Typography
+                    component="h5"
+                    variant="h6"
+                    style={{ textAlign: "center" }}
+                >
                     {acceptError}
                 </Typography>
             ) : null}

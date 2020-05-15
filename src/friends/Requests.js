@@ -148,7 +148,7 @@ const Requests = () => {
 
     return (
         <div>
-            Pending
+            <em>Pending</em>
             <List>
                 {sent !== undefined
                     ? sent.map((users, index) => {
@@ -193,7 +193,7 @@ const Requests = () => {
                       })
                     : null}
             </List>
-            Received
+            <em>Received</em>
             <List>
                 {received !== undefined
                     ? received.map((users, index) => {

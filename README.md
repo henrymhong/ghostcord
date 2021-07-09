@@ -40,3 +40,5 @@ Main Contributers:
 - https://github.com/dqnguyen1506
 
 ==Copyright of 4Asians==
+
+![homepage v1](https://user-images.githubusercontent.com/44854519/125009532-8ed41500-e019-11eb-9fb8-993f197cb4d5.png)
